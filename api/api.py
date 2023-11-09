@@ -4,10 +4,10 @@ import mysql.connector
 app = Flask(__name__)
 
 db_config = {
-    "host" : "localhost",
-    "user" : "root",
-    "password" : "CbWMELm7e6F3Q6o",
-    "database" : "test"
+    "host" : "leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com",
+    "user" : "Admin",
+    "password" : "LeikuradLesa12345",
+    "database" : "LeikuradLesa"
 }
 
 
@@ -20,11 +20,8 @@ def connectToDatebase():
         return None
 
 def errorHandling(error):
-    if error.errno == 1146:
-        return jsonify({'error': 'Table does not exist'}), 404
-    else:
-        print("Error executing query: " + error)
-        return jsonify({'error': 'Internal Server Error'}), 500
+    if error.errno == 1146: return jsonify({'error': 'Table does not exist'}), 404
+    else: return jsonify({'error': 'Internal Server Error'}), 500
 
 def readTable(table: str):
     db = connectToDatebase()
