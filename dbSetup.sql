@@ -1,4 +1,4 @@
--- Active: 1699365169542@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
+-- Active: 1699522940973@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
 
 
 -- create Tables in the database leikuradlesa
@@ -27,13 +27,13 @@ insert into TegundNotanda values(1, "Nemandi");
 
 -- create table hopur that has all groups of students and their teachers
 
-create table Hopur {
-    ID int not null,
+create table Hopur (
+    ID int auto_increment,
     nafnhops varchar(255),
     notendaID varchar(50) not null,
     primary key(ID),
     FOREIGN KEY (notendaID) REFERENCES notandi(notendanafn)
-}
+)
 
 -- create table SpurningaTegundir that stores the different types of questions
 create table SpurningaTegundir(
@@ -48,7 +48,7 @@ insert into SpurningaTegundir values(2, "Textaspurning");
 
 -- create table Bok that stores the different books and info on that book
 create table Bok(
-    ID int not null,
+    ID int auto_increment,
     nafnbokar varchar(255) not null,
     hofundur varchar(255) not null,
     utgafuar varchar(4) not null,
@@ -57,7 +57,7 @@ create table Bok(
 
 -- create table spurningar that stores the different questions
 create table spurningar (
-    ID int not null,
+    ID int auto_increment,
     spurning varchar(255) not null,
     rettSvar varchar(255) not null,
     spurningategund int not null,
@@ -66,7 +66,6 @@ create table spurningar (
     FOREIGN KEY (spurningategund) REFERENCES SpurningaTegundir(tegund),
     FOREIGN KEY (bokID) REFERENCES Bok(ID)
 )
-
 
 
 
