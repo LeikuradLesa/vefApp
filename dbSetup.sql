@@ -28,7 +28,7 @@ insert into TegundNotanda values(1, "Nemandi");
 -- create table hopur that has all groups of students and their teachers
 
 create table Hopur {
-    ID int not null,
+    ID int auto increment,
     nafnhops varchar(255),
     notendaID varchar(50) not null,
     primary key(ID),
@@ -48,7 +48,7 @@ insert into SpurningaTegundir values(2, "Textaspurning");
 
 -- create table Bok that stores the different books and info on that book
 create table Bok(
-    ID int not null,
+    ID int auto increment,
     nafnbokar varchar(255) not null,
     hofundur varchar(255) not null,
     utgafuar varchar(4) not null,
@@ -57,7 +57,7 @@ create table Bok(
 
 -- create table spurningar that stores the different questions
 create table spurningar (
-    ID int not null,
+    ID int auto increment,
     spurning varchar(255) not null,
     rettSvar varchar(255) not null,
     spurningategund int not null,
