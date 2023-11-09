@@ -5,14 +5,15 @@ Use test
 
 
 CREATE TABLE Persons (
-    PersonID int PRIMARY KEY,
+    PersonID int,
     LastName varchar(255),
     FirstName varchar(255),
     Address varchar(255),
     City varchar(255)
 );
 
-INSERT INTO Persons (PersonID, LastName, FirstName, Address, City)
-VALUES (25, "jonatanson", "hannes", "Jonatan street", "Jonatan City")
-
+#View table
 Select * from Persons
+
+#Delete Table
+drop table Persons
