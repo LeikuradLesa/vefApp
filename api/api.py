@@ -19,18 +19,27 @@ def connectToDatebase():
         print("Error connecting to the database: " + e)
         return None
 
+def getData():
+    if request.method == "POST": return dict(request.json)
+    else: return request.args.to_dict()
+
 def errorHandling(error):
     if error.errno == 1146: return jsonify({'error': 'Table does not exist'}), 404
     else: return jsonify({'error': 'Internal Server Error'}), 500
 
-def readTable(table: str):
+def readTable(table: str, parameters: dict = None):
     db = connectToDatebase()
 
     if db:
         cursor = db.cursor(dictionary=True)
 
         try:
-            cursor.execute("SELECT * FROM " + table)
+            sql = "SELECT * FROM " + table
+            if "order" in parameters: sql += " ORDER BY " + str(parameters["order"])
+            if "page" in parameters: sql += " LIMIT " + str(parameters["page"]*parameters["amount"]) + "," + str(parameters["amount"])
+
+            print(sql)
+            cursor.execute(sql)
             result = cursor.fetchall()
 
             cursor.close()
@@ -102,44 +111,33 @@ def deleteTable(table: str, where: str):
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
 #Routing
-@app.route("/read/<table>", methods=["GET"])
+@app.route("/read/<table>", methods=["GET", "POST"])
 def read(table):
-    return readTable(table)
+    data = getData()
+    return readTable(table, data)
 
 @app.route("/add/<table>", methods=["GET", "POST"])
 def insert(table):
-    if request.method == "POST":
-        data = dict(request.json)
-        insertTable(table, data)
-    else:
-        parameters = request.args.to_dict()
-        insertTable(table, parameters)
+    data = getData()
+    insertTable(table, data)
 
     return jsonify({'added to table': table})
 
 @app.route("/change/<table>", methods=["GET", "POST"])
 def change(table):
-    if request.method == "POST":
-        data = dict(request.json)
-        if "where" in data: changeTable(table, data)
-        else: return jsonify({'needs where': "in json file"})
-    else:
-        parameters = request.args.to_dict()
-        if "where" in parameters: changeTable(table, parameters)
-        else: return jsonify({'needs where': "in json file"})
+    data = getData()
+
+    if "where" in data: changeTable(table, data)
+    else: return jsonify({'needs where': "in json file"})
 
     return jsonify({'changed things in table': table})
 
 @app.route("/delete/<table>", methods=["GET", "POST"])
 def delete(table):
-    if request.method == "POST":
-        data = dict(request.json)
-        if "where" in data: deleteTable(table, data["where"])
-        else: return jsonify({'needs where': "in json file"})
-    else:
-        parameters = request.args.to_dict()
-        if "where" in parameters: deleteTable(table, parameters["where"])
-        else: return jsonify({'needs where': "in json file"})
+    data = getData()
+
+    if "where" in data: deleteTable(table, data["where"])
+    else: return jsonify({'needs where': "in json file"})
 
     return jsonify({'deleted things in table': table})
 
