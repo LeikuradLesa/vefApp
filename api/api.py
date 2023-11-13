@@ -84,11 +84,27 @@ def changeTable(table: str, parameters: dict):
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
+def deleteTable(table: str, where: str):
+    db = connectToDatebase()
+
+    if db:
+        cursor = db.cursor()
+
+        try:
+            sql = "DELETE FROM " + table + " WHERE " + where
+
+            cursor.execute(sql)
+            db.commit()
+
+            cursor.close()
+            db.close()
+        except mysql.connector.Error as error: return errorHandling(error)
+    else: return jsonify({'error': 'Failed to connect to the database'}), 500
+
 #Routing
 @app.route("/read/<table>", methods=["GET"])
 def read(table):
     return readTable(table)
-
 
 @app.route("/add/<table>", methods=["GET", "POST"])
 def insert(table):
@@ -105,13 +121,27 @@ def insert(table):
 def change(table):
     if request.method == "POST":
         data = dict(request.json)
-        changeTable(table, data)
+        if "where" in data: changeTable(table, data)
+        else: return jsonify({'needs where': "in json file"})
     else:
         parameters = request.args.to_dict()
-        changeTable(table, parameters)
+        if "where" in parameters: changeTable(table, parameters)
+        else: return jsonify({'needs where': "in json file"})
 
     return jsonify({'changed things in table': table})
 
+@app.route("/delete/<table>", methods=["GET", "POST"])
+def delete(table):
+    if request.method == "POST":
+        data = dict(request.json)
+        if "where" in data: deleteTable(table, data["where"])
+        else: return jsonify({'needs where': "in json file"})
+    else:
+        parameters = request.args.to_dict()
+        if "where" in parameters: deleteTable(table, parameters["where"])
+        else: return jsonify({'needs where': "in json file"})
+
+    return jsonify({'deleted things in table': table})
 
 if __name__ == "__main__":
     app.run(debug=True)
