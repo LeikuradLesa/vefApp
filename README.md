@@ -1,6 +1,3 @@
-# vefapp_Prufa
-Prufa fyrir Leikur að Lesa vefapp
-
 # Lýsing yfir hugmyndinni
 Hugmynd okkar er vefapp sem að verðlaunar/hvetur krakka fyrir að lesa heima og í skólanum.
 Kennari setur upp hóp á síðunni af nemendum sínum og í þeim hóp er markmið að lesa 1 bók.
@@ -11,4 +8,4 @@ Kennari setur upp hóp á síðunni af nemendum sínum og í þeim hóp er markm
 
 ## Database
 Við erum að nota frían DB frá Amazon og er létt að tengjast honum yfir netið til að vinna með hann. Hönnun að DB var gerð af Andrés Hauk og setup þar.
-[mynd af DB hönnun](https://github.com/LeikuradLesa/vefApp/blob/main/DBSchema.pdf)
+[mynd af DB hönnun](https://github.com/LeikuradLesa/vefApp/blob/Convert-pdf-to-PNG/DBSchema-2.png)
