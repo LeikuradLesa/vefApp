@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import mysql.connector
+import math
 
 app = Flask(__name__)
 
@@ -26,25 +27,53 @@ def getData():
 def errorHandling(error):
     if error.errno == 1146: return jsonify({'error': 'Table does not exist'}), 404
     else: return jsonify({'error': 'Internal Server Error'}), 500
+    db = connectToDatebase()
+
+    if db:
+        cursor = db.cursor()
+
+        try:
+            sql = "SELECT * FROM " + table
+            cursor.execute(sql)
+            count = cursor.rowcount
+
+            cursor.close()
+            db.close()
+
+            return count
+        except mysql.connector.Error as error: return errorHandling(error)
+    else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
 def readTable(table: str, parameters: dict = None):
     db = connectToDatebase()
 
     if db:
-        cursor = db.cursor(dictionary=True)
-
         try:
+            #Count Pages
+            pages = 0
+            if "page" in parameters:
+                cursorCount = db.cursor(buffered=True)
+                cursorCount.execute("SELECT * FROM " + table)
+
+                count = cursorCount.rowcount
+                cursorCount.close()
+
+                pages = math.ceil(count/parameters["amount"])
+
+            #Info
+            cursorInfo = db.cursor(dictionary=True)
+
             sql = "SELECT * FROM " + table
             if "order" in parameters: sql += " ORDER BY " + str(parameters["order"])
             if "page" in parameters: sql += " LIMIT " + str(parameters["page"]*parameters["amount"]) + "," + str(parameters["amount"])
 
-            print(sql)
-            cursor.execute(sql)
-            result = cursor.fetchall()
+            cursorInfo.execute(sql)
+            info = cursorInfo.fetchall()
 
-            cursor.close()
+            cursorInfo.close()
             db.close()
 
+            result = { "pages" : pages, "info" : info }
             return jsonify(result)
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
