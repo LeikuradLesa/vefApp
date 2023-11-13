@@ -61,6 +61,29 @@ def insertTable(table: str, parameters: dict):
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
+def changeTable(table: str, parameters: dict):
+    db = connectToDatebase()
+
+    if db:
+        cursor = db.cursor()
+
+        try:
+            where = parameters["where"]
+            parameters.pop("where", None)
+
+            for k, v in parameters.items():
+                if type(v) == str: thingToChange = str(k) + " = '" + str(v) + "'"
+                else: thingToChange = str(k) + " = " + str(v)
+                sql = "UPDATE " + table + " SET " + thingToChange + " WHERE " + where
+
+                cursor.execute(sql)
+                db.commit()
+
+            cursor.close()
+            db.close()
+        except mysql.connector.Error as error: return errorHandling(error)
+    else: return jsonify({'error': 'Failed to connect to the database'}), 500
+
 #Routing
 @app.route("/read/<table>", methods=["GET"])
 def read(table):
@@ -77,6 +100,17 @@ def insert(table):
         insertTable(table, parameters)
 
     return jsonify({'added to table': table})
+
+@app.route("/change/<table>", methods=["GET", "POST"])
+def change(table):
+    if request.method == "POST":
+        data = dict(request.json)
+        changeTable(table, data)
+    else:
+        parameters = request.args.to_dict()
+        changeTable(table, parameters)
+
+    return jsonify({'changed things in table': table})
 
 
 if __name__ == "__main__":
