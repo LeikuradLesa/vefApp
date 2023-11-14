@@ -53,7 +53,11 @@ def readTable(table: str, parameters: dict = None):
             pages = 0
             if "page" in parameters:
                 cursorCount = db.cursor(buffered=True)
-                cursorCount.execute("SELECT * FROM " + table)
+
+                sql = "SELECT * FROM " + table
+                if "where" in parameters: sql += " WHERE " + parameters["where"]
+
+                cursorCount.execute(sql)
 
                 count = cursorCount.rowcount
                 cursorCount.close()
@@ -64,6 +68,7 @@ def readTable(table: str, parameters: dict = None):
             cursorInfo = db.cursor(dictionary=True)
 
             sql = "SELECT * FROM " + table
+            if "where" in parameters: sql += " WHERE " + parameters["where"]
             if "order" in parameters: sql += " ORDER BY " + str(parameters["order"])
             if "page" in parameters: sql += " LIMIT " + str(parameters["page"]*parameters["amount"]) + "," + str(parameters["amount"])
 
