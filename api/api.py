@@ -27,22 +27,6 @@ def getData():
 def errorHandling(error):
     if error.errno == 1146: return jsonify({'error': 'Table does not exist'}), 404
     else: return jsonify({'error': 'Internal Server Error'}), 500
-    db = connectToDatebase()
-
-    if db:
-        cursor = db.cursor()
-
-        try:
-            sql = "SELECT * FROM " + table
-            cursor.execute(sql)
-            count = cursor.rowcount
-
-            cursor.close()
-            db.close()
-
-            return count
-        except mysql.connector.Error as error: return errorHandling(error)
-    else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
 def readTable(table: str, parameters: dict = None):
     db = connectToDatebase()
