@@ -12,3 +12,4 @@ Við erum að nota frían DB frá Amazon og er létt að tengjast honum yfir net
 
 ## Figma
 <a href="https://www.figma.com/file/0JwZDx5KyvpPMukh5UmuIK/Leikur-a%C3%B0-lesa?type=design&node-id=0%3A1&mode=design&t=nVqTcb2IbomrrbrY-1">Smelltu hér</a>
+![mynd af Figma](https://github.com/LeikuradLesa/vefApp/blob/main/Figma.png)
