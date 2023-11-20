@@ -1,5 +1,4 @@
--- Active: 1699522940973@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
-
+-- Active: 1699365169542@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
 
 -- create Tables in the database leikuradlesa
 -- create table notandi that stores all user info
