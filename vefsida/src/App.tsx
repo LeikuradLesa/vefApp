@@ -1,6 +1,7 @@
 import ListGroup from "./components/ListGroup";
 
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 function App() {
   let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
@@ -16,6 +17,7 @@ function App() {
         onSelectItem={handleSelectectItem}
       />
       <Login></Login>
+      <Signup></Signup>
     </div>
     
   );
