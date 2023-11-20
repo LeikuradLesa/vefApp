@@ -1,5 +1,7 @@
 import ListGroup from "./components/ListGroup";
 
+import Login from "./components/Login";
+
 function App() {
   let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
 
@@ -13,7 +15,9 @@ function App() {
         heading="Leikur að lesa"
         onSelectItem={handleSelectectItem}
       />
+      <Login></Login>
     </div>
+    
   );
 }
 
