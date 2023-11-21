@@ -128,6 +128,29 @@ def deleteTable(table: str, where: str):
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
+def login(table: str, parameters: dict):
+    db = connectToDatebase()
+
+    if db:
+        try:
+            cursorInfo = db.cursor(dictionary=True)
+            sql = "SELECT * FROM " + table + " WHERE " + parameters["where"]
+
+            cursorInfo.execute(sql)
+            info = cursorInfo.fetchall()
+
+            cursorInfo.close()
+            db.close()
+            
+            parameters.pop("where")
+            loggedIn = 1
+            for i in parameters.keys():
+                if parameters[i] != info[0][i]: loggedIn = 0
+
+            return jsonify({"login" : loggedIn})
+        except mysql.connector.Error as error: return errorHandling(error)
+    else: return jsonify({'error': 'Failed to connect to the database'}), 500
+
 #Routing
 @app.route("/read/<table>", methods=["GET", "POST"])
 def read(table):
@@ -158,6 +181,12 @@ def delete(table):
     else: return jsonify({'needs where': "in json file"})
 
     return jsonify({'deleted things in table': table})
+
+@app.route("/login/<table>", methods=["GET", "POST"])
+def loginRoute(table):
+    data = getData()
+    if "where" in data: return login(table, data)
+    else: return jsonify({'needs where': "in json file"})
 
 if __name__ == "__main__":
     app.run(debug=True)

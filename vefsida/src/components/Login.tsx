@@ -1,22 +1,43 @@
 import React, { useState } from 'react';
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginInfo, setLoginInfo] = useState({
+    "notendanafn" : "",
+    "lykilord" : ""
+  });
 
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginInfo((prevInfo) => ({
+      ...prevInfo,
+      [name]: value,
+    }));
   };
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Add your login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
+
+    try {
+      const checkResponse = await fetch(`https://bilazon.pythonanywhere.com/login/notandi`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "where": `notendanafn="${loginInfo.notendanafn}"`,
+          "lykilord" : loginInfo.lykilord
+        }),
+      });
+
+      if (!checkResponse.ok) {
+        throw new Error(`HTTP error! Status: ${checkResponse.status}`);
+      }
+
+      // Check if the name and password match
+      const loggedIn = await checkResponse.json();
+      console.log(loggedIn)
+
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
   };
 
   return (
@@ -25,12 +46,12 @@ const LoginPage: React.FC = () => {
       <form onSubmit={handleLogin}>
         <label>
           Username:
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          <input type="text" required name="notendanafn" value={loginInfo.notendanafn} onChange={handleInputChange} />
         </label>
         <br />
         <label>
           Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <input type="password" required name="lykilord" value={loginInfo.lykilord} onChange={handleInputChange} />
         </label>
         <br />
         <button type="submit">Login</button>

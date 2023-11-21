@@ -58,6 +58,7 @@ const Signup: React.FC = () => {
             }
     
             console.log('User added successfully!');
+            setUsernameExists(false)
     
         } catch (error) {
             console.error('Error adding user:', error);
@@ -66,7 +67,7 @@ const Signup: React.FC = () => {
 
     return (
         <div>
-            {usernameExists && <h1>Username er núþegar til, reyndu aftur</h1>}
+            {usernameExists && <h3>Username er núþegar til, reyndu aftur</h3>}
 
             <h1>Create Account</h1>
             <form onSubmit={handleSubmit}>
