@@ -1,9 +1,9 @@
-
 import React from 'react';
+import './app.css'; // Import the CSS file
 
 const AboutUs: React.FC = () => {
   return (
-    <div>
+    <div className="about-us">
       <h2>Um okkur</h2>
       <p>Velkominn á síðuna okkar Leiku að lesa.</p>
       <p>Við erum nemendur á Tölvubraut í tækniskólanum og við fengum það verkefni að hanna vefsíðu.</p>
