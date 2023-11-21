@@ -4,6 +4,8 @@ import Login from "./components/Login";
 
 import AboutUs from "./components/about-us";
 
+import Footer from "./components/footer";
+
 function App() {
   let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
 
@@ -19,6 +21,7 @@ function App() {
       />
       <Login></Login>
       <AboutUs></AboutUs>
+      <Footer></Footer>
     </div>
     
   );
