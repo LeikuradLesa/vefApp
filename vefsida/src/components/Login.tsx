@@ -45,12 +45,12 @@ const LoginPage: React.FC = () => {
       <h1>Login Page</h1>
       <form onSubmit={handleLogin}>
         <label>
-          Username:
+          Notenda Nafn:
           <input type="text" required name="notendanafn" value={loginInfo.notendanafn} onChange={handleInputChange} />
         </label>
         <br />
         <label>
-          Password:
+          Lykilorð:
           <input type="password" required name="lykilord" value={loginInfo.lykilord} onChange={handleInputChange} />
         </label>
         <br />

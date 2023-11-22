@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import mysql.connector
 import math
 
 app = Flask(__name__)
+CORS(app)
 
 db_config = {
     "host" : "leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com",
@@ -143,11 +145,15 @@ def login(table: str, parameters: dict):
             db.close()
             
             parameters.pop("where")
-            loggedIn = 1
-            for i in parameters.keys():
-                if parameters[i] != info[0][i]: loggedIn = 0
+            if info:
+                loggedIn = 0
+                for i in parameters.keys():
+                    if parameters[i] != info[0][i]: loggedIn = -1
 
-            return jsonify({"login" : loggedIn})
+                if loggedIn == 0 and "tegundnotanda" in info[0]: loggedIn = info[0]["tegundnotanda"]
+
+                return jsonify({"login" : loggedIn})
+            else: return jsonify({"login" : -1})
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 

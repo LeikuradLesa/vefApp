@@ -13,11 +13,11 @@ const Signup: React.FC = () => {
 
     const [usernameExists, setUsernameExists] = useState(false);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setAccountInfo((prevInfo) => ({
           ...prevInfo,
-          [name]: value,
+          [name]: name === 'tegundnotanda' ? parseInt(value, 10) : value,
         }));
     };
 
@@ -103,7 +103,7 @@ const Signup: React.FC = () => {
                 <br />
 
                 <label >Tegund Notanda:</label>
-                <select id="tegundNotanda" name="tegundnotanda">
+                <select id="tegundNotanda" name="tegundnotanda" value={accountInfo.tegundnotanda} onChange={handleInputChange}>
                 <option value="0">Nemandi</option>
                 <option value="1">Kennari</option>
                 </select>
