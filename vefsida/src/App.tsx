@@ -1,6 +1,7 @@
 import ListGroup from "./components/ListGroup";
 
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 import AboutUs from "./components/about-us";
 
@@ -20,6 +21,8 @@ function App() {
         onSelectItem={handleSelectectItem}
       />
       <Login></Login>
+      <Signup></Signup>
+
       <AboutUs></AboutUs>
       <Footer></Footer>
     </div>
