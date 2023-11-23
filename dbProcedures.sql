@@ -35,5 +35,12 @@ BEGIN
 END $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE InsertIntoSpurningar(IN p_spurning VARCHAR(255), IN p_rettSvar VARCHAR(255), IN p_tegund INT, IN p_bokID INT)
+BEGIN
+    INSERT INTO spurningar(spurning, rettSvar, spurningategundtegund, bokID) VALUES (p_spurning, p_rettSvar, p_tegund, p_bokID);
+END $$
+DELIMITER ;
+
 
 
