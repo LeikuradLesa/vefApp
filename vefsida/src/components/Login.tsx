@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="login-container"> {/* Add a class name for styling */}
+    <div className="login-container">
       <h1>Innskráning nemanda</h1>
       <form onSubmit={handleLogin}>
         <label className='Title'>
