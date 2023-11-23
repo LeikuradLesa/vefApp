@@ -157,6 +157,32 @@ def login(table: str, parameters: dict):
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
+def signup(table: str, parameters: dict):
+    db = connectToDatebase()
+
+    if db:
+        #Check if user already exists
+        cursorInfo = db.cursor(dictionary=True)
+        exists = 1
+        info = []
+
+        for i in range(len(parameters["checkInfo"])):
+            sql = "SELECT * FROM " + table + " WHERE " + parameters["checkInfo"][i] + "='" + parameters["info"][parameters["checkInfo"][i]] + "'"
+
+            cursorInfo.execute(sql)
+            subInfo = cursorInfo.fetchall()
+            if subInfo: info.append(subInfo[0])
+
+        cursorInfo.close()
+        db.close()
+        
+        if info:
+            for i in range(len(info)):
+                for j in parameters["checkInfo"]:
+                    if parameters["info"][j] == info[i][j]: exists = 0
+        
+        return exists
+
 #Routing
 @app.route("/read/<table>", methods=["GET", "POST"])
 def read(table):
@@ -193,6 +219,14 @@ def loginRoute(table):
     data = getData()
     if "where" in data: return login(table, data)
     else: return jsonify({'needs where': "in json file"})
+
+@app.route("/signup/<table>", methods=["GET", "POST"])
+def signupRoute(table):
+    data = getData()
+    if signup(table, data):
+        insertTable(table, data["info"])
+        return jsonify({'signed up': 1})
+    else: return jsonify({'signed up': 0})
 
 if __name__ == "__main__":
     app.run(debug=True)

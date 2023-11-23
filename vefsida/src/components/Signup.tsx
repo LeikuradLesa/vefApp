@@ -11,7 +11,7 @@ const Signup: React.FC = () => {
         "tegundnotanda" : 0
     });
 
-    const [usernameExists, setUsernameExists] = useState(false);
+    const [error, setError] = useState("");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -25,49 +25,38 @@ const Signup: React.FC = () => {
         e.preventDefault();
     
         try {
-            // Check if the user with the given username already exists
-            const checkResponse = await fetch(`https://bilazon.pythonanywhere.com/read/notandi`, {
+            const response = await fetch('https://bilazon.pythonanywhere.com/signup/notandi', {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    "where": `notendanafn="${accountInfo.notendanafn}"`
+                    "checkInfo" : ["notendanafn", "netfang"],
+                    "info" : accountInfo
                 }),
-            });
-    
-            if (!checkResponse.ok) {
-                throw new Error(`HTTP error! Status: ${checkResponse.status}`);
-            }
-    
-            const existingUsers = await checkResponse.json();
-            if (existingUsers.info.length > 0) {
-                // User with the given username already exists
-                console.error('User with this username already exists');
-                setUsernameExists(true)
-                return;
-            }
-    
-            // If the user doesn't exist, proceed with creating the account
-            const response = await fetch('https://bilazon.pythonanywhere.com/add/notandi', {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(accountInfo),
             });
     
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
     
-            console.log('User added successfully!');
-            setUsernameExists(false)
+            const data = await response.json();
+
+            if (data["signed up"] === 1) {
+                console.log('User added successfully!');
+                setError("Account Created");
+            } else {
+                console.error('Failed to create user. Please try again.');
+                setError("Notandanafn eða netfang núþegar notað");
+            }
     
         } catch (error) {
             console.error('Error adding user:', error);
+            setError("Vandamál með nýskráningu");
         }
     };
 
     return (
         <div>
-            {usernameExists && <h3>Username er núþegar til, reyndu aftur</h3>}
+            <h3>{error}</h3>
 
             <h1>Create Account</h1>
             <form onSubmit={handleSubmit}>
@@ -83,7 +72,7 @@ const Signup: React.FC = () => {
                 <br />
                 <label>
                     Lykilorð:
-                    <input type="password" name="lykilord" value={accountInfo.lykilord} required onChange={handleInputChange} />
+                    <input type="password" name="lykilord" value={accountInfo.lykilord} minLength={8} maxLength={50} autoComplete='off' required onChange={handleInputChange} />
                 </label>
                 <br />
                 <label>
