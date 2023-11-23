@@ -1,8 +1,10 @@
-import ListGroup from "./components/ListGroup";
+//import ListGroup from "./components/ListGroup";
 
 import Login from "./components/Login";
 
 import AboutUs from "./components/about-us";
+
+import Navbar from "./components/navbar";
 
 function App() {
   let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
@@ -11,8 +13,8 @@ function App() {
     console.log(item);
   };
   return (
-    <div>
-      <ListGroup
+    <div className="App">
+      <Navbar
         items={items}
         heading="Leikur að lesa"
         onSelectItem={handleSelectectItem}
@@ -20,7 +22,6 @@ function App() {
       <Login></Login>
       <AboutUs></AboutUs>
     </div>
-    
   );
 }
 
