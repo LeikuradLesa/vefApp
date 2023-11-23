@@ -3,6 +3,10 @@ import ListGroup from "./components/ListGroup";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 
+import AboutUs from "./components/about-us";
+
+import Footer from "./components/footer";
+
 function App() {
   let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
 
@@ -18,6 +22,9 @@ function App() {
       />
       <Login></Login>
       <Signup></Signup>
+
+      <AboutUs></AboutUs>
+      <Footer></Footer>
     </div>
     
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css'; // Import the CSS file
 
 const LoginPage: React.FC = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -41,8 +42,8 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className="login-container"> {/* Add a class name for styling */}
+      <h1>Innskráning nemanda</h1>
       <form onSubmit={handleLogin}>
         <label>
           Notenda Nafn:
@@ -54,7 +55,7 @@ const LoginPage: React.FC = () => {
           <input type="password" required name="lykilord" value={loginInfo.lykilord} onChange={handleInputChange} />
         </label>
         <br />
-        <button type="submit">Login</button>
+        <button type="submit">Innskrá</button>
       </form>
     </div>
   );
