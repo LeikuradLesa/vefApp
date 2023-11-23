@@ -66,7 +66,7 @@ const Signup: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className='login-container'>
             {usernameExists && <h3>Username er núþegar til, reyndu aftur</h3>}
 
             <h1>Create Account</h1>
