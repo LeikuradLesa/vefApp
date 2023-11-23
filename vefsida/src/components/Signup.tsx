@@ -55,6 +55,7 @@ const Signup: React.FC = () => {
     };
 
     return (
+        <div>
             <h3>{error}</h3>
 
             <h1>Create Account</h1>
