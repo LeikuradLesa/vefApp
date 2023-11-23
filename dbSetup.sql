@@ -1,4 +1,4 @@
--- Active: 1699365169542@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
+-- Active: 1700573522610@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
 
 -- create Tables in the database leikuradlesa
 -- create table notandi that stores all user info
@@ -27,10 +27,9 @@ insert into TegundNotanda values(1, "Nemandi");
 -- create table hopur that has all groups of students and their teachers
 
 create table Hopur (
-    ID int auto_increment,
+    ID int not null,
     nafnhops varchar(255),
     notendaID varchar(50) not null,
-    primary key(ID),
     FOREIGN KEY (notendaID) REFERENCES notandi(notendanafn)
 )
 
