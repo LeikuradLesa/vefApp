@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import mysql.connector
 import math
 
 app = Flask(__name__)
+CORS(app)
 
 db_config = {
     "host" : "leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com",
@@ -128,6 +130,48 @@ def deleteTable(table: str, where: str):
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
+def login(table: str, parameters: dict):
+    db = connectToDatebase()
+
+    if db:
+        try:
+            info = []
+            cursorInfo = db.cursor(dictionary=True)
+            cursorInfo.callproc("Login", [parameters["nafn"], parameters["lykilord"]])
+            for result in cursorInfo.stored_results(): info.append(result.fetchall())
+
+            cursorInfo.close()
+            db.close()
+            
+            return jsonify(info[0][0])
+        except mysql.connector.Error as error: return errorHandling(error)
+    else: return jsonify({'error': 'Failed to connect to the database'}), 500
+
+def signup(table: str, parameters: dict):
+    db = connectToDatebase()
+
+    if db:
+        #Check if user already exists
+        cursorInfo = db.cursor(dictionary=True)
+        info = []
+
+        for i in range(len(parameters["checkInfo"])):
+            sql = "SELECT * FROM " + table + " WHERE " + parameters["checkInfo"][i] + "='" + parameters["info"][parameters["checkInfo"][i]] + "'"
+
+            cursorInfo.execute(sql)
+            subInfo = cursorInfo.fetchall()
+            if subInfo: info.append(subInfo[0])
+
+        cursorInfo.close()
+        db.close()
+        
+        if info:
+            for i in range(len(info)):
+                for j in parameters["checkInfo"]:
+                    if parameters["info"][j] == info[i][j]: return 0
+        
+        return 1
+
 #Routing
 @app.route("/read/<table>", methods=["GET", "POST"])
 def read(table):
@@ -158,6 +202,19 @@ def delete(table):
     else: return jsonify({'needs where': "in json file"})
 
     return jsonify({'deleted things in table': table})
+
+@app.route("/login/<table>", methods=["GET", "POST"])
+def loginRoute(table):
+    data = getData()
+    return login(table, data)
+
+@app.route("/signup/<table>", methods=["GET", "POST"])
+def signupRoute(table):
+    data = getData()
+    if signup(table, data):
+        insertTable(table, data["info"])
+        return jsonify({'signed up': 1})
+    else: return jsonify({'signed up': 0})
 
 if __name__ == "__main__":
     app.run(debug=True)

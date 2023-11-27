@@ -1,17 +1,11 @@
-//import ListGroup from "./components/ListGroup";
 
-import Login from "./components/Login";
-
-import AboutUs from "./components/about-us";
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Homepage from "./components/Homepage";
+import Nemandi from "./components/VefsidaNemanda";
 import Navbar from "./components/navbar";
 
 function App() {
-  let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
 
-  const handleSelectectItem = (item: string) => {
-    console.log(item);
-  };
   return (
     <div className="App">
       <Navbar
@@ -19,9 +13,19 @@ function App() {
         heading="Leikur að lesa"
         onSelectItem={handleSelectectItem}
       />
-      <Login></Login>
-      <AboutUs></AboutUs>
+      <Router>
+      <div>
+        
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/Nemandi" element={<Nemandi />} />
+
+        </Routes>
+        
+      </div>
+      </Router>
     </div>
+    
   );
 }
 
