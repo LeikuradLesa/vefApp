@@ -1,10 +1,8 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ListGroup from "./components/ListGroup";
-
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-
 import AboutUs from "./components/about-us";
-
 import Footer from "./components/footer";
 
 function App() {
@@ -13,20 +11,27 @@ function App() {
   const handleSelectectItem = (item: string) => {
     console.log(item);
   };
-  return (
-    <div>
-      <ListGroup
-        items={items}
-        heading="Leikur að lesa"
-        onSelectItem={handleSelectectItem}
-      />
-      <Login></Login>
-      <Signup></Signup>
 
-      <AboutUs></AboutUs>
-      <Footer></Footer>
-    </div>
-    
+  return (
+    <Router>
+      <div>
+        <ListGroup
+          items={items}
+          heading="Leikur að lesa"
+          onSelectItem={handleSelectectItem}
+        />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          
+        </Routes>
+        <Login />
+        <Signup />
+        <AboutUs />
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
