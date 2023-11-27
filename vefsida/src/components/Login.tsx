@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import './Login.css'; 
+import { useNavigate  } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
   const [loginInfo, setLoginInfo] = useState({
     "notendanafn" : "",
     "lykilord" : ""
   });
+
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,15 +38,37 @@ const LoginPage: React.FC = () => {
 
       // Check if the name and password match
       const loggedIn = await checkResponse.json();
-      console.log(loggedIn)
+      console.log(loggedIn);
+      switch(loggedIn["result"])
+      {
+        case -1:
+        {
+          setError("Notendanafn eða lykilorð er vitlaust");
+          break;
+        }
+
+        case 0:
+        {
+          navigate("/Nemandi");
+          break;
+        }
+
+        case 1:
+        {
+          navigate("/Kennari");
+          break;
+        }
+      }
 
     } catch (error) {
       console.error('Error logging in:', error);
+      setError("vandamál að innskrá");
     }
   };
 
   return (
     <div className="login-container">
+      <h3>{error}</h3>
       <h1>Innskráning nemanda</h1>
       <form onSubmit={handleLogin}>
         <label className='Title'>
