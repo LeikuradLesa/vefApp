@@ -1,32 +1,18 @@
-import ListGroup from "./components/ListGroup";
-
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-
-import AboutUs from "./components/about-us";
-
-import Footer from "./components/footer";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Homepage from "./components/Homepage";
 
 function App() {
-  let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
 
-  const handleSelectectItem = (item: string) => {
-    console.log(item);
-  };
   return (
-    <div>
-      <ListGroup
-        items={items}
-        heading="Leikur að lesa"
-        onSelectItem={handleSelectectItem}
-      />
-      <Login></Login>
-      <Signup></Signup>
-
-      <AboutUs></AboutUs>
-      <Footer></Footer>
-    </div>
-    
+    <Router>
+      <div>
+        
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+        </Routes>
+        
+      </div>
+    </Router>
   );
 }
 
