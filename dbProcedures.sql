@@ -101,5 +101,15 @@ INSERT INTO Hopur (nafnhops, notendanafn, bokID) values
 ("GRE2", "Johannsson", 2),
 ("GRE2", "Karlsson", 2);
 
--- Create stored procedure for Nemanda website too show data from that Nemandi
+-- Create stored procedure that shows all the hopur where a person is using the notendanafn
+DELIMITER $$
+CREATE PROCEDURE Showbooks(IN p_notendanafn VARCHAR(50))
+-- It needs to return a list of nafnbokar in the Bok table and it can only be the ones the student is a part of
+BEGIN
+    SELECT nafnbokar FROM Bok WHERE ID IN (SELECT bokID FROM Hopur WHERE notendanafn = p_notendanafn);
+END $$
+DELIMITER ;
+
+call Showbooks ("Dagsson");
+
 
