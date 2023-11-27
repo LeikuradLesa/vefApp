@@ -130,20 +130,20 @@ def deleteTable(table: str, where: str):
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
-def login(table: str, parameters: dict):
+def call(procedure: str, parameters: dict):
     db = connectToDatebase()
+    info = []
 
     if db:
         try:
-            info = []
             cursorInfo = db.cursor(dictionary=True)
-            cursorInfo.callproc("Login", [parameters["nafn"], parameters["lykilord"]])
+            cursorInfo.callproc(procedure, parameters["info"])
             for result in cursorInfo.stored_results(): info.append(result.fetchall())
 
             cursorInfo.close()
             db.close()
             
-            return jsonify(info[0][0])
+            return jsonify(info)
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
@@ -203,10 +203,10 @@ def delete(table):
 
     return jsonify({'deleted things in table': table})
 
-@app.route("/login/<table>", methods=["GET", "POST"])
-def loginRoute(table):
+@app.route("/call/<procedure>", methods=["GET", "POST"])
+def callRoute(procedure):
     data = getData()
-    return login(table, data)
+    return call(procedure, data)
 
 @app.route("/signup/<table>", methods=["GET", "POST"])
 def signupRoute(table):
