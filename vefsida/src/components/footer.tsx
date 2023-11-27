@@ -12,13 +12,14 @@ const Footer = () => {
                 <p>kt: 000000-0000</p>
             </div>
             <div className="address">
-                <h4 className='address-h4'>Heimilisfáng</h4>
+                <h4 className='address-h4'>Heimilisfang</h4>
                 <p>Tækniskólinn Háteigsvegi</p>
                 <p>105 Reykjavík</p>
             </div>
             <div className="social-media-icons">
                 <img src={facebookIcon} alt="Facebook" />
-                <img src={githubIcon} alt="Github" />
+                <a href="https://github.com/LeikuradLesa/vefApp" target="_blank" rel="noopener noreferrer">
+                    <img src={githubIcon} alt="Github" /></a>
                 <img src={instagramIcon} alt="Instagram" />
             </div>
         </footer>
