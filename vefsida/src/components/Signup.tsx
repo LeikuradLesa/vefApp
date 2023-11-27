@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css';
 
 const Signup: React.FC = () => {
     const [accountInfo, setAccountInfo] = useState({
@@ -55,12 +56,12 @@ const Signup: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className='login-container'>
             <h3>{error}</h3>
 
-            <h1>Create Account</h1>
+            <h1 >Create Account</h1>
             <form onSubmit={handleSubmit}>
-                <label>
+                <label className=''>
                     Notenda Nafn:
                     <input type="text" name="notendanafn" value={accountInfo.notendanafn} required onChange={handleInputChange} />
                 </label>
