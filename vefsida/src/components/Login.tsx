@@ -49,7 +49,7 @@ const LoginPage: React.FC = () => {
 
         case 0:
         {
-          navigate("/Nemandi");
+          navigate("/Nemandi", { state: { username: loginInfo.notendanafn } });
           break;
         }
 
