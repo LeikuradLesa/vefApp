@@ -135,25 +135,15 @@ def login(table: str, parameters: dict):
 
     if db:
         try:
+            info = []
             cursorInfo = db.cursor(dictionary=True)
-            sql = "SELECT * FROM " + table + " WHERE " + parameters["where"]
-
-            cursorInfo.execute(sql)
-            info = cursorInfo.fetchall()
+            cursorInfo.callproc("Login", [parameters["nafn"], parameters["lykilord"]])
+            for result in cursorInfo.stored_results(): info.append(result.fetchall())
 
             cursorInfo.close()
             db.close()
             
-            parameters.pop("where")
-            if info:
-                loggedIn = 0
-                for i in parameters.keys():
-                    if parameters[i] != info[0][i]: loggedIn = -1
-
-                if loggedIn == 0 and "tegundnotanda" in info[0]: loggedIn = info[0]["tegundnotanda"]
-
-                return jsonify({"login" : loggedIn})
-            else: return jsonify({"login" : -1})
+            return jsonify(info[0][0])
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
@@ -163,7 +153,6 @@ def signup(table: str, parameters: dict):
     if db:
         #Check if user already exists
         cursorInfo = db.cursor(dictionary=True)
-        exists = 1
         info = []
 
         for i in range(len(parameters["checkInfo"])):
@@ -179,9 +168,9 @@ def signup(table: str, parameters: dict):
         if info:
             for i in range(len(info)):
                 for j in parameters["checkInfo"]:
-                    if parameters["info"][j] == info[i][j]: exists = 0
+                    if parameters["info"][j] == info[i][j]: return 0
         
-        return exists
+        return 1
 
 #Routing
 @app.route("/read/<table>", methods=["GET", "POST"])
@@ -217,8 +206,7 @@ def delete(table):
 @app.route("/login/<table>", methods=["GET", "POST"])
 def loginRoute(table):
     data = getData()
-    if "where" in data: return login(table, data)
-    else: return jsonify({'needs where': "in json file"})
+    return login(table, data)
 
 @app.route("/signup/<table>", methods=["GET", "POST"])
 def signupRoute(table):
