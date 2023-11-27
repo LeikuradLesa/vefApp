@@ -130,6 +130,23 @@ def deleteTable(table: str, where: str):
         except mysql.connector.Error as error: return errorHandling(error)
     else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
+def call(procedure: str, parameters: dict):
+    db = connectToDatebase()
+    info = []
+
+    if db:
+        try:
+            cursorInfo = db.cursor(dictionary=True)
+            cursorInfo.callproc(procedure, parameters["info"])
+            for result in cursorInfo.stored_results(): info.append(result.fetchall())
+
+            cursorInfo.close()
+            db.close()
+            
+            return jsonify(info)
+        except mysql.connector.Error as error: return errorHandling(error)
+    else: return jsonify({'error': 'Failed to connect to the database'}), 500
+
 def signup(table: str, parameters: dict):
     db = connectToDatebase()
 
@@ -154,23 +171,6 @@ def signup(table: str, parameters: dict):
                     if parameters["info"][j] == info[i][j]: return 0
         
         return 1
-
-def call(procedure: str, parameters: dict):
-    db = connectToDatebase()
-    info = []
-
-    if db:
-        try:
-            cursorInfo = db.cursor(dictionary=True)
-            cursorInfo.callproc(procedure, parameters["info"])
-            for result in cursorInfo.stored_results(): info.append(result.fetchall())
-
-            cursorInfo.close()
-            db.close()
-            
-            return jsonify(info)
-        except mysql.connector.Error as error: return errorHandling(error)
-    else: return jsonify({'error': 'Failed to connect to the database'}), 500
 
 #Routing
 @app.route("/read/<table>", methods=["GET", "POST"])
@@ -203,6 +203,11 @@ def delete(table):
 
     return jsonify({'deleted things in table': table})
 
+@app.route("/call/<procedure>", methods=["GET", "POST"])
+def callRoute(procedure):
+    data = getData()
+    return call(procedure, data)
+
 @app.route("/signup/<table>", methods=["GET", "POST"])
 def signupRoute(table):
     data = getData()
@@ -210,11 +215,6 @@ def signupRoute(table):
         insertTable(table, data["info"])
         return jsonify({'signed up': 1})
     else: return jsonify({'signed up': 0})
-
-@app.route("/call/<procedure>", methods=["GET", "POST"])
-def callRoute(procedure):
-    data = getData()
-    return call(procedure, data)
 
 if __name__ == "__main__":
     app.run(debug=True)
