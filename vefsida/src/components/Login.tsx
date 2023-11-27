@@ -23,7 +23,7 @@ const LoginPage: React.FC = () => {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          "where": `notendanafn="${loginInfo.notendanafn}"`,
+          "nafn": loginInfo.notendanafn,
           "lykilord" : loginInfo.lykilord
         }),
       });
