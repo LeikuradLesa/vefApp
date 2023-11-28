@@ -80,15 +80,15 @@ INSERT INTO Hopur (nafnhops, notendanafn, notendanafnKennara, bokID) values
 
 -- add more data so that all the above are reading 2 books
 INSERT INTO Hopur (nafnhops, notendanafn, notendanafnKennara, bokID) values 
-("GRE", "Bjarnason", "Andrés", 1),
-("GRE", "Dagsson", "Andrés", 1),
-("GRE", "Einarsson", "Andrés", 1),
-("GRE", "Finnsson", "Andrés", 1),
-("GRE", "Gunnarsson", "Andrés", 1),
-("GRE", "Hjartarson", "Andrés", 1),
-("GRE", "Ingolfsson", "Andrés", 1),
-("GRE", "Johannsson", "Andrés", 1),
-("GRE", "Karlsson", "Andrés", 1);
+("GRE2", "Bjarnason", "Andrés", 1),
+("GRE2", "Dagsson", "Andrés", 1),
+("GRE2", "Einarsson", "Andrés", 1),
+("GRE3", "Finnsson", "Andrés", 1),
+("GRE3", "Gunnarsson", "Andrés", 8),
+("GRE4", "Hjartarson", "Björn", 1),
+("GRE5", "Ingolfsson", "Björn", 1),
+("GRE7", "Johannsson", "Björn", 1),
+("GRE6", "Karlsson", "Björn", 1);
 
 select * from Hopur;
 
@@ -108,6 +108,26 @@ DELIMITER ;
 
 call Showbooks ("Dagsson");
 
--- Create stored procedure that shows all 
+-- Create stored procedure that shows all the Hopur where a kennari is part of the kennaranotendanafn ADD
+DELIMITER $$
+CREATE PROCEDURE ShowHopur(IN p_kennaranotendanafn VARCHAR(50))
+-- It needs to return a list of nafnhops in the Hopur table and it can only be the ones the kennari is a part of and should be grouped so it will not show the same group many times
+BEGIN
+    SELECT nafnhops FROM Hopur WHERE notendanafnKennara = p_kennaranotendanafn GROUP BY nafnhops;
+END $$
+DELIMITER ;
 
 call ShowHopur ("Andrés");
+
+-- create a stored procedure that return the notendannafn of all the students where there kennari is the kennaranotendanafn
+DELIMITER $$
+CREATE PROCEDURE ShowStudents(IN p_kennaranotendanafn VARCHAR(50))
+-- needs to return a list of the studnets notendanafn and book name and be sorted by there name so that duplicate names are easier to read
+BEGIN
+    SELECT Hopur.notendanafn, Bok.nafnbokar FROM notandi, Hopur, Bok WHERE notandi.notendanafn = Hopur.notendanafn AND Hopur.bokID = Bok.ID AND Hopur.notendanafnKennara = p_kennaranotendanafn ORDER BY notandi.nafn;
+END $$
+DELIMITER ;
+
+drop procedure ShowStudents;
+
+call ShowStudents ("Andrés");
