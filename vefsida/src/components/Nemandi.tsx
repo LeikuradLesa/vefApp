@@ -1,7 +1,7 @@
 import React from "react";
-import ListGroup from "./ListGroup";
 import Footer from "./footer";
 import { useLocation } from 'react-router-dom';
+import Navbar from "./navbar";
 
 const Nemandi: React.FC = () => {
     let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
@@ -14,7 +14,7 @@ const Nemandi: React.FC = () => {
 
     return (
         <React.Fragment>
-            <ListGroup
+            <Navbar
                 items={items}
                 heading="Leikur að lesa"
                 onSelectItem={handleSelectectItem}
