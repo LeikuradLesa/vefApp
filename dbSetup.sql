@@ -27,14 +27,18 @@ insert into TegundNotanda values(1, "Nemandi");
 -- create table hopur that has all groups of students and their teachers
 
 create table Hopur (
-    ID int AUTO_INCREMENT,
-    nafnhops varchar(255) not null,
+    ID int auto_increment,
+    nafnhops varchar(50) not null,
     notendanafn varchar(50) not null,
+    notendanafnKennara varchar(50) not null,
     bokID int not null,
     primary key(ID),
     FOREIGN KEY (notendanafn) REFERENCES notandi(notendanafn),
+    FOREIGN KEY (notendanafnKennara) REFERENCES notandi(notendanafn),
     FOREIGN KEY (bokID) REFERENCES Bok(ID)
 )
+
+drop table Hopur;
 
 -- create table SpurningaTegundir that stores the different types of questions
 create table SpurningaTegundir(
@@ -73,7 +77,5 @@ create table spurningar (
 )
 
 drop table SpurningaTegundir;
-
-
 
 
