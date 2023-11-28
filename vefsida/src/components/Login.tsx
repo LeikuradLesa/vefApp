@@ -23,12 +23,15 @@ const LoginPage: React.FC = () => {
     event.preventDefault();
 
     try {
-      const checkResponse = await fetch(`https://bilazon.pythonanywhere.com/login/notandi`, {
+      const checkResponse = await fetch(`https://bilazon.pythonanywhere.com/call/Login`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          "nafn": loginInfo.notendanafn,
-          "lykilord" : loginInfo.lykilord
+          "info":
+          [
+            loginInfo.notendanafn,
+            loginInfo.lykilord
+          ]
         }),
       });
 
@@ -38,8 +41,8 @@ const LoginPage: React.FC = () => {
 
       // Check if the name and password match
       const loggedIn = await checkResponse.json();
-      console.log(loggedIn);
-      switch(loggedIn["result"])
+      console.log(loggedIn[0][0]);
+      switch(loggedIn[0][0]["result"])
       {
         case -1:
         {
