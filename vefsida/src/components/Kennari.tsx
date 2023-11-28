@@ -1,7 +1,7 @@
 
 import React from "react";
-import ListGroup from "./ListGroup";
 import Footer from "./footer";
+import Navbar from "./navbar";
 
 function Kennari() {
     let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
@@ -10,11 +10,13 @@ function Kennari() {
     };
     return (
         <React.Fragment>
-            <ListGroup
+            <Navbar
                 items={items}
                 heading="Leikur að lesa"
                 onSelectItem={handleSelectectItem}
             />
+            <h1>Kennara síða</h1>
+
             
             <Footer />
         </React.Fragment>
