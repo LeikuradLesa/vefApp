@@ -51,6 +51,8 @@ insert into SpurningaTegundir values(0, "Fjölvalsspurning");
 insert into SpurningaTegundir values(1, "Myndaspurning");
 insert into SpurningaTegundir values(2, "Textaspurning");
 
+drop table 
+
 -- create table Bok that stores the different books and info on that book
 create table Bok(
     ID int auto_increment,
