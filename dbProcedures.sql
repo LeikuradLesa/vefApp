@@ -101,10 +101,12 @@ INSERT INTO notandi (notendanafn, lykilord, netfang, nafn, simanumer, dob, tegun
 DELIMITER $$
 CREATE PROCEDURE Showbooks(IN p_notendanafn VARCHAR(50))
 -- It needs to return a list of nafnbokar in the Bok table and it can only be the ones the student is a part of
-BEGIN
-    SELECT nafnbokar FROM Bok WHERE ID IN (SELECT bokID FROM Hopur WHERE notendanafn = p_notendanafn);
+BEGIN -- add it so it select the nafnbokar and ID
+    SELECT nafnbokar, Bok.ID FROM Bok WHERE ID IN (SELECT bokID FROM Hopur WHERE notendanafn = p_notendanafn);
 END $$
 DELIMITER ;
+
+drop procedure Showbooks;
 
 call Showbooks ("Dagsson");
 

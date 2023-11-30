@@ -40,19 +40,6 @@ create table Hopur (
 
 drop table Hopur;
 
--- create table SpurningaTegundir that stores the different types of questions
-create table SpurningaTegundir(
-    tegund int not null,
-    tegundspurningar varchar(50) not null,
-    primary key(tegund)
-)
-
-insert into SpurningaTegundir values(0, "Fjölvalsspurning");
-insert into SpurningaTegundir values(1, "Myndaspurning");
-insert into SpurningaTegundir values(2, "Textaspurning");
-
-drop table 
-
 -- create table Bok that stores the different books and info on that book
 create table Bok(
     ID int auto_increment,
@@ -66,18 +53,38 @@ create table Bok(
 insert into Bok values(2, "ljónið og kötturinn", "Heimir", "2021");
 insert into Bok values(3, "madagaskar", "Arnar", "2020");
 
--- create table spurningar that stores the different questions
-create table spurningar (
-    ID int auto_increment,
-    spurning varchar(255) not null,
-    rettSvar varchar(255) not null,
-    spurningategund int not null,
+create table kaflar (
+    kafliID int auto_increment,
     bokID int not null,
-    primary key(ID),
-    FOREIGN KEY (spurningategund) REFERENCES SpurningaTegundir(tegund),
-    FOREIGN KEY (bokID) REFERENCES Bok(ID)
+    kaflanumer int not null,
+    kaflanafn varchar(255),
+    foreign key (bokID) references Bok(ID),
+    primary key (kafliID)
 )
 
-drop table SpurningaTegundir;
+create table fjolsvarspurningar (
+    spurning_ID int auto_increment,
+    bokID int not null,
+    kaflaID int not null,
+    spurning varchar(255) not null,
+    valkostur1 varchar(255) not null,
+    valkostur2 varchar(255) not null,
+    valkostur3 varchar(255),
+    valkostur4 varchar(255),
+    rettsvar varchar(1) not null,
+    foreign key (bokID) references Bok(ID),
+    foreign key (kaflaID) references kaflar(kafliID),
+    primary key (spurning_ID)
+)
+
+create table userProgress (
+    notendanafn varchar(50) not null,
+    bokID int not null,
+    kaflaID int not null,
+    siduNumer int not null,
+    foreign key (notendanafn) references notandi(notendanafn),
+    foreign key (bokID) references Bok(ID),
+    foreign key (kaflaID) references kaflar(kafliID)
+)
 
 
