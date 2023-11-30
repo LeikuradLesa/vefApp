@@ -5,7 +5,7 @@ interface TypingH1Props {
 }
 
 const NemandiGogn: React.FC<TypingH1Props> = ({ username }) => {
-  const [books, setBooks] = useState<any[]>([]); // Use a more specific type for books if possible
+  const [books, setBooks] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -21,7 +21,7 @@ const NemandiGogn: React.FC<TypingH1Props> = ({ username }) => {
         });
 
         const data = await response.json();
-        setBooks(data[0]); // Assuming the books are in the first array of the response
+        setBooks(data[0]);
       } catch (error) {
         console.error('Error fetching books:', error);
       }
@@ -32,13 +32,17 @@ const NemandiGogn: React.FC<TypingH1Props> = ({ username }) => {
 
   return (
     <div>
-      <div>
-        {books.map((book, index) => (
-          <div key={index}>
-            <h2>{book.nafnbokar}</h2>
-          </div>
-        ))}
-      </div>
+      {books.length === 0 ? (
+        <h2>Engar bækur skráðar</h2>
+      ) : (
+        <div>
+          {books.map((book, index) => (
+            <a key={index} href={`Bok/${book.ID}`}>
+              <h2>{book.nafnbokar}</h2>
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

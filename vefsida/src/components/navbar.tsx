@@ -28,7 +28,7 @@ const Navbar = ({ items, heading, onSelectItem }: Props) => {
 
   return (
     <>
-      <h1>{heading}</h1>
+      <h1 >{heading}</h1>
       <div>
         <nav>
           <div className="burger-menu" onClick={updateMenu}>
