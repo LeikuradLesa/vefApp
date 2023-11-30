@@ -53,7 +53,7 @@ create table Bok(
 insert into Bok values(2, "ljónið og kötturinn", "Heimir", "2021");
 insert into Bok values(3, "madagaskar", "Arnar", "2020");
 
-create table kaflar (
+create table Kaflar (
     kafliID int auto_increment,
     bokID int not null,
     kaflanumer int not null,
@@ -62,7 +62,7 @@ create table kaflar (
     primary key (kafliID)
 )
 
-create table fjolsvarspurningar (
+create table Fjolsvarspurningar (
     spurning_ID int auto_increment,
     bokID int not null,
     kaflaID int not null,
@@ -73,7 +73,7 @@ create table fjolsvarspurningar (
     valkostur4 varchar(255),
     rettsvar varchar(1) not null,
     foreign key (bokID) references Bok(ID),
-    foreign key (kaflaID) references kaflar(kafliID),
+    foreign key (kaflaID) references Kaflar(kafliID),
     primary key (spurning_ID)
 )
 
@@ -84,7 +84,96 @@ create table userProgress (
     siduNumer int not null,
     foreign key (notendanafn) references notandi(notendanafn),
     foreign key (bokID) references Bok(ID),
-    foreign key (kaflaID) references kaflar(kafliID)
+    foreign key (kaflaID) references Kaflar(kafliID)
 )
 
+-- Sample data for Books
+INSERT INTO Bok (nafnbokar, hofundur, utgafuar) VALUES
+    ('Database Fundamentals', 'John Smith', '2020'),
+    ('Data Structures and Algorithms', 'Jane Doe', '2019');
 
+-- Sample data for Chapters
+INSERT INTO Kaflar (kafliID, bokID, kaflanumer, kaflanafn) values
+    (1, 1, 1, 'Introduction'),
+    (2, 1, 2, 'Database Design'),
+    (3, 2, 1, 'Introduction'),
+    (4, 2, 2, 'Sorting Algorithms');
+
+-- Sample data for Multiple-Choice Questions
+INSERT INTO Fjolsvarspurningar (spurning_ID, bokID, kaflaID, spurning, valkostur1, valkostur2, valkostur3, valkostur4, rettsvar) VALUES
+    (1, 1, 1, 'What is a database?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', 'A'),
+    (2, 1, 1, 'What is a database management system?', 'A software that manages databases', 'A software that manages tables', 'A software that manages data', 'A software that manages data and tables', 'D'),
+    (3, 1, 2, 'What is a database schema?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', 'C'),
+    (4, 1, 2, 'What is a database instance?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', 'A'),
+    (5, 2, 3, 'What is a sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'A'),
+    (6, 2, 3, 'What is a stable sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'D'),
+    (7, 2, 4, 'What is a comparison-based sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'A'),
+    (8, 2, 4, 'What is a non-comparison-based sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'D');
+
+
+
+-- Sample data for User Progress
+INSERT INTO userProgress (notendanafn, bokID, kaflaID, siduNumer) VALUES
+    ('Bjarnason', 1, 1, 1),
+    ('Bjarnason', 1, 1, 2),
+    ('Bjarnason', 1, 2, 1),
+    ('Bjarnason', 1, 2, 2),
+    ('Bjarnason', 2, 3, 1),
+    ('Bjarnason', 2, 3, 2),
+    ('Bjarnason', 2, 4, 1),
+    ('Bjarnason', 2, 4, 2),
+    ('Dagsson', 1, 1, 1),
+    ('Dagsson', 1, 1, 2),
+    ('Dagsson', 1, 2, 1),
+    ('Dagsson', 1, 2, 2),
+    ('Dagsson', 2, 3, 1),
+    ('Dagsson', 2, 3, 2),
+    ('Dagsson', 2, 4, 1),
+    ('Dagsson', 2, 4, 2),
+    ('Einarsson', 1, 1, 1),
+    ('Einarsson', 1, 1, 2),
+    ('Einarsson', 1, 2, 1),
+    ('Einarsson', 1, 2, 2),
+    ('Einarsson', 2, 3, 1),
+    ('Einarsson', 2, 3, 2),
+    ('Einarsson', 2, 4, 1),
+    ('Einarsson', 2, 4, 2),
+    ('Finnsson', 1, 1, 1),
+    ('Finnsson', 1, 1, 2),
+    ('Finnsson', 1, 2, 1),
+    ('Finnsson', 1, 2, 2),
+    ('Finnsson', 2, 3, 1),
+    ('Finnsson', 2, 3, 2),
+    ('Finnsson', 2, 4, 1),
+    ('Finnsson', 2, 4, 2),
+    ('Gunnarsson', 1, 1, 1),
+    ('Gunnarsson', 1, 1, 2),
+    ('Gunnarsson', 1, 2, 1),
+    ('Gunnarsson', 1, 2, 2),
+    ('Gunnarsson', 2, 3, 1),
+    ('Gunnarsson', 2, 3, 2),
+    ('Gunnarsson', 2, 4, 1),
+    ('Gunnarsson', 2, 4, 2),
+    ('Hjartarson', 1, 1, 1),
+    ('Hjartarson', 1, 1, 2),
+    ('Hjartarson', 1, 2, 1),
+    ('Hjartarson', 1, 2, 2),
+    ('Hjartarson', 2, 3, 1),
+    ('Hjartarson', 2, 3, 2),
+    ('Hjartarson', 2, 4, 1),
+    ('Hjartarson', 2, 4, 2),
+    ('Ingolfsson', 1, 1, 1),
+    ('Ingolfsson', 1, 1, 2),
+    ('Ingolfsson', 1, 2, 1),
+    ('Ingolfsson', 1, 2, 2),
+    ('Ingolfsson', 2, 3, 1),
+    ('Ingolfsson', 2, 3, 2),
+    ('Ingolfsson', 2, 4, 1),
+    ('Ingolfsson', 2, 4, 2),
+    ('Johannsson', 1, 1, 1),
+    ('Johannsson', 1, 1, 2),
+    ('Johannsson', 1, 2, 1),
+    ('Johannsson', 1, 2, 2),
+    ('Johannsson', 2, 3, 1),
+    ('Johannsson', 2, 3, 2),
+    ('Johannsson', 2, 4, 1);
