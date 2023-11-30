@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homepage from "./components/Homepage";
 import Kennari from "./components/Kennari";
 import Nemandi from "./components/Nemandi";
-
+import "./components/App.css";
 function App() {
   return (
     <div className="App">

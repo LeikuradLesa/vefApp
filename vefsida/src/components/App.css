@@ -1,9 +1,19 @@
+body{
+  background-color: rgb(244, 243, 243);
+}
 div.about-us, h2,p {
   text-align: center;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 20px;
   display: block;
+}
+.about-us {
+  width: 80%;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #19d101a5;
+  border: 1px solid #000000;
 }
 
 /*Fyrir ofan er css fyrir um okkur*/
@@ -60,5 +70,13 @@ div.about-us, h2,p {
   margin-bottom: 15px;
 }
 
-/*Hérna fyrir neðan er css fyrir nýskráningu*/
 
+/*Hérna fyrir neðan er css fyrir Borderinum*/
+.App {
+  max-width: 375px; /* iPhone X width */
+  height: 812px; /* iPhone X height */
+  margin: 0 auto; /* Center the app on the page */
+  border: 16px solid black; /* iPhone X border */
+  border-radius: 40px; /* Rounded corners */
+  overflow: auto; /* Enable scrolling if content overflows */
+}
