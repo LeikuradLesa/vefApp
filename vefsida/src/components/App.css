@@ -73,10 +73,39 @@ div.about-us, h2,p {
 
 /*Hérna fyrir neðan er css fyrir Borderinum*/
 .App {
-  max-width: 375px; /* iPhone X width */
-  height: 812px; /* iPhone X height */
-  margin: 0 auto; /* Center the app on the page */
-  border: 16px solid black; /* iPhone X border */
-  border-radius: 40px; /* Rounded corners */
-  overflow: auto; /* Enable scrolling if content overflows */
+  max-width: 375px; 
+  height: 812px; 
+  margin: 0 auto;
+  border: 16px solid black;
+  border-radius: 40px;
+  overflow: auto;
+}
+/*Hér fyrir neðan er css fyrir nemanda síðuna*/
+.book-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.book-title {
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+}
+
+
+.book-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.book-link:hover {
+  background-color: #555;
 }
