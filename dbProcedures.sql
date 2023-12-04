@@ -1,4 +1,4 @@
--- Active: 1700573522610@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
+-- Active: 1699522940973@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
 
 -- Create a stored procedure that takes in a users notendanafna and lykilord and it checks the tegundnotanda to see if a user is a kennari or a nemandi
 -- if the user is a kennari it returns 1 if a nemandi it returns 0 and if anything elsa it returns -1

@@ -4,6 +4,7 @@ import Footer from "./footer";
 import Navbar from "./navbar";
 import { useLocation } from 'react-router-dom';
 import KennaraGogn from "./kennara-gogn";
+import CreateHopur from "./create-hopur";
 
 function Kennari() {
     let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
@@ -23,6 +24,8 @@ function Kennari() {
                 onSelectItem={handleSelectectItem}
             />
             <h1>Kennara síða, {user?.username}</h1>
+
+            <CreateHopur usernameKennara={username || 'Einhvað fór úrskeiðis'} />
             <KennaraGogn username={username || 'Einhvað fór úrskeiðis'} />
 
             <Footer />
