@@ -25,8 +25,8 @@ const Nemandi: React.FC = () => {
             <h1 className="welcome">Velkomin {user?.username}</h1>
             
             <div className="books">
-            <h1>Mínar bækur:</h1>
-            <NemandiGogn username={username || 'Einhvað fór úrskeiðis'} />
+                <h1>Mínar bækur:</h1>
+                <NemandiGogn username={username || 'Einhvað fór úrskeiðis'} />
             </div>
             <Footer />
         </React.Fragment>
