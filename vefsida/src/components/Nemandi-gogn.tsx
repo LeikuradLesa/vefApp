@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './App.css';
 
 interface TypingH1Props {
     username: string;
@@ -31,14 +32,14 @@ const NemandiGogn: React.FC<TypingH1Props> = ({ username }) => {
   }, [username]);
 
   return (
-    <div>
+    <div className="book-list">
       {books.length === 0 ? (
-        <h2>Engar bækur skráðar</h2>
+        <h2 className="empty-message">Engar bækur skráðar</h2>
       ) : (
         <div>
           {books.map((book, index) => (
-            <a key={index} href={`Bok/${book.ID}`}>
-              <h2>{book.nafnbokar}</h2>
+            <a key={index} href={`Bok/${book.ID}`} className="book-link">
+              <h2 className="book-title">{book.nafnbokar}</h2>
             </a>
           ))}
         </div>
