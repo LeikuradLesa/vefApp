@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 interface CreateHopurProps {
   usernameKennara: string;
@@ -41,24 +42,26 @@ const CreateHopur: React.FC<CreateHopurProps> = ({ usernameKennara }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Hopur Name:
-        <input type="text" value={hopurName} onChange={(e) => setHopurName(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Student Name:
-        <input type="text" value={studentName} onChange={(e) => setStudentName(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Book ID:
-        <input type="number" value={bookId} onChange={(e) => setBookId(Number(e.target.value))} />
-      </label>
-      <br />
-      <button type="submit">Create Hopur</button>
-    </form>
+    <div className=''>
+      <form onSubmit={handleSubmit}>
+        <label>
+          <h4>Nafn hópar:</h4>
+          <input type="text" value={hopurName} onChange={(e) => setHopurName(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          <h4>Nafn nemanda:</h4>
+          <input type="text" value={studentName} onChange={(e) => setStudentName(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          <h4>Nafn bókar:</h4>
+          <input type="number" value={bookId} onChange={(e) => setBookId(Number(e.target.value))} />
+        </label>
+        <br />
+        <button type="submit">Create Hopur</button>
+      </form>
+    </div>
   );
 };
 
