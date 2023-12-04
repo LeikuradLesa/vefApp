@@ -26,9 +26,15 @@ function Kennari() {
             />
 
             <h1 className="welcome">Velkomin {user?.username}</h1>
-            <CreateHopur usernameKennara={username || 'Einhvað fór úrskeiðis'} />
             <div className="books">
-                <h1>Hópar: </h1>
+                <h1>Búa til og skrá í hóp</h1>
+                <h6>Til þess að búa til hóp fyllið í reytina hér fyrir neðan</h6>
+                <h6>og það er sama ferlið til þess að bæta við nemundum í hópinn</h6>
+                
+                <CreateHopur usernameKennara={username || 'Einhvað fór úrskeiðis'} />
+            </div>
+            <div className="books">
+                <h1>Þínir hópar: </h1>
                 <KennaraGogn username={username || 'Einhvað fór úrskeiðis'} />
             </div>
             
