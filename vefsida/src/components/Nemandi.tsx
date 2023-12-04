@@ -22,10 +22,12 @@ const Nemandi: React.FC = () => {
                 onSelectItem={handleSelectectItem}
             />
             
-            <h1>Welkommin, {user?.username}</h1>
-
-            <h1>Mínar bækur</h1>
+            <h1 className="welcome">Velkomin {user?.username}</h1>
+            
+            <div className="books">
+            <h1>Mínar bækur:</h1>
             <NemandiGogn username={username || 'Einhvað fór úrskeiðis'} />
+            </div>
             <Footer />
         </React.Fragment>
     );
