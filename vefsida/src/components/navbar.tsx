@@ -30,8 +30,9 @@ const Navbar = ({ items, heading, onSelectItem }: Props) => {
   return (
     <>
       <div className="navbar_items">
+      <h1 className="heading">{heading}</h1>
+      <div className="navbar">
         <nav>
-          <h1 className="heading">{heading}</h1>
           <img src={Dark_logo} alt="logo" />
           <div className="burger-menu" onClick={updateMenu}>
             <div className={burger_class}></div>
