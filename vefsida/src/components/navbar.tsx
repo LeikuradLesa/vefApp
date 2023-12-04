@@ -4,6 +4,7 @@ import Dark_logo from "../assets/dark_logo_png.png";
 interface Props {
   items: string[];
   heading: string;
+  color: string;
   onSelectItem: (item: string) => void;
 }
 
@@ -28,8 +29,7 @@ const Navbar = ({ items, heading, onSelectItem }: Props) => {
 
   return (
     <>
-      <h1>{heading}</h1>
-      <div className="navbar">
+      <div className="navbar_items">
         <nav>
           <h1 className="heading">{heading}</h1>
           <img src={Dark_logo} alt="logo" />
@@ -51,7 +51,7 @@ const Navbar = ({ items, heading, onSelectItem }: Props) => {
                   : "list-group-item"
               }
               key={item}
-              onClick={() => {
+              onMouseEnter={() => {
                 setSelectedIndex(index);
                 onSelectItem(item);
               }}
