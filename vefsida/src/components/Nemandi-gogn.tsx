@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './App.css';
 
 interface TypingH1Props {
-    username: string;
+  username: string;
 }
 
 const NemandiGogn: React.FC<TypingH1Props> = ({ username }) => {
@@ -38,9 +39,11 @@ const NemandiGogn: React.FC<TypingH1Props> = ({ username }) => {
       ) : (
         <div>
           {books.map((book, index) => (
-            <a key={index} href={`Bok/${book.ID}`} className="book-link">
+            <Link key={index} to={`/spurning/${book.ID}/${book.kaflaID}`} className="book-link">
               <h2 className="book-title">{book.nafnbokar}</h2>
-            </a>
+              <h2 className="book-title">Kafli: {book.kaflaID}</h2>
+              <h2 className="book-title">Blaðsíða: {book.siduNumer}</h2>
+            </Link>
           ))}
         </div>
       )}
