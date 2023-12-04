@@ -33,7 +33,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-call InsertIntoHopur ("Bruh2", "HeimirG", "Andrés", 2);
+call InsertIntoHopur ("Bruh2", "Arnar", "AlliG", 2);
 
 drop procedure InsertIntoHopur;
 
@@ -142,7 +142,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-call ShowHopur ("Andrés");
+call ShowHopur ("AlliG");
 
 -- create a stored procedure that return the notendannafn of all the students where there kennari is the kennaranotendanafn
 DELIMITER $$
