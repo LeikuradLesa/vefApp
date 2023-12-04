@@ -4,11 +4,9 @@ import Dark_logo from "../assets/dark_logo_png.png";
 interface Props {
   items: string[];
   heading: string;
-  color: string;
-  onSelectItem: (item: string) => void;
 }
 
-const Navbar = ({ items, heading, onSelectItem }: Props) => {
+const Navbar = ({ items, heading }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
@@ -44,20 +42,21 @@ const Navbar = ({ items, heading, onSelectItem }: Props) => {
         {items.length === 0 && <p>No items</p>}
         <ul className="list-group">
           {items.map((item, index) => (
-            <li
-              className={
-                selectedIndex === index
-                  ? "list-group-item active"
-                  : "list-group-item"
-              }
-              key={item}
-              onMouseEnter={() => {
-                setSelectedIndex(index);
-                onSelectItem(item);
-              }}
-            >
-              {item}
-            </li>
+            <a href="/" onClick={() => setSelectedIndex(index)}>
+              <li
+                className={
+                  selectedIndex === index
+                    ? "list-group-item list-group-item-dark"
+                    : "list-group-item"
+                }
+                key={item}
+                onMouseEnter={() => {
+                  setSelectedIndex(index);
+                }}
+              >
+                {item}
+              </li>
+            </a>
           ))}
         </ul>
       </div>
