@@ -55,7 +55,7 @@ const CreateHopur: React.FC<CreateHopurProps> = ({ usernameKennara }) => {
         </label>
         <br />
         <label>
-          <h4>Nafn bókar:</h4>
+          <h4>Velja bók:</h4>
           <input type="number" value={bookId} onChange={(e) => setBookId(Number(e.target.value))} />
         </label>
         <br />
