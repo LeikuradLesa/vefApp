@@ -13,14 +13,8 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Create stored procedure for every table so it makes it easy to insert INTO
 -- Create stored procedure for notandi table
-DELIMITER $$
-CREATE PROCEDURE InsertNotandi(IN p_notendanafn VARCHAR(50), IN p_lykilord VARCHAR(50), IN p_netfang VARCHAR(50), IN p_nafn VARCHAR(50), IN p_simanumer VARCHAR(50), IN p_dob DATE, IN p_tegundnotanda INT)
-BEGIN
-    INSERT INTO notandi (notendanafn, lykilord, netfang, nafn, simanumer, dob, tegundnotanda) VALUES (p_notendanafn, p_lykilord, p_netfang, p_nafn, p_simanumer, p_dob, p_tegundnotanda);
-END $$
-DELIMITER ;
+create procedure InsertIntoNotandi(IN )
 
 -- Create stored procedure for TegundNotanda table
 DELIMITER $$
@@ -32,11 +26,13 @@ DELIMITER ;
 
 -- Create stored procedure for Hopur table
 DELIMITER $$
-CREATE PROCEDURE InsertHopur(IN p_nafnhops VARCHAR(50), IN p_notendanafn VARCHAR(50), IN p_notendanafnKennara VARCHAR(50), IN p_bokID INT)
+CREATE PROCEDURE InsertIntoHopur (IN p_nafnhops VARCHAR(50), IN p_notendanafn VARCHAR(50), IN p_notendanafnkennara VARCHAR(50), p_bokID INT)
 BEGIN
-    INSERT INTO Hopur (nafnhops, notendanafn, notendanafnKennara, bokID) VALUES (p_nafnhops, p_notendanafn, p_notendanafnKennara, p_bokID);
+    INSERT INTO hopur(nafnhops, notendanafn, notendanafnKennara, bokID) VALUES (p_nafnhops, p_notendanafn, p_notendanafnKennara, p_bokID);
 END $$
 DELIMITER ;
+
+drop procedure InsertIntoHopur;
 
 -- Create stored procedure for SpurningaTegundir table
 DELIMITER $$
@@ -108,7 +104,7 @@ DELIMITER ;
 
 drop procedure Showbooks;
 
-call Showbooks ("Dagsson");
+call Showbooks ("HeimirG");
 
 -- Create stored procedure that shows all the Hopur where a kennari is part of the kennaranotendanafn ADD
 DELIMITER $$

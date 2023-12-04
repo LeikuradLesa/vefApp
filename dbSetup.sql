@@ -40,6 +40,9 @@ create table Hopur (
 
 drop table Hopur;
 
+insert into Hopur (nafnhops, notendanafn, notendanafnKennara, bokID) values
+("GE", "HeimirG","Andrés", 1);
+
 -- create table Bok that stores the different books and info on that book
 create table Bok(
     ID int auto_increment,
@@ -111,7 +114,6 @@ INSERT INTO Fjolsvarspurningar (spurning_ID, bokID, kaflaID, spurning, valkostur
     (8, 2, 4, 'What is a non-comparison-based sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'D');
 
 
-
 -- Sample data for User Progress
 INSERT INTO userProgress (notendanafn, bokID, kaflaID, siduNumer) VALUES
     ('Bjarnason', 1, 1, 1),
@@ -177,3 +179,6 @@ INSERT INTO userProgress (notendanafn, bokID, kaflaID, siduNumer) VALUES
     ('Johannsson', 2, 3, 1),
     ('Johannsson', 2, 3, 2),
     ('Johannsson', 2, 4, 1);
+
+insert into userProgress (notendanafn, bokID, kaflaID, siduNumer) VALUES
+("Addi", 1, 1, 1);
