@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./navbar.css";
-
+import Dark_logo from "../assets/dark_logo_png.png";
 interface Props {
   items: string[];
   heading: string;
@@ -28,36 +28,37 @@ const Navbar = ({ items, heading, onSelectItem }: Props) => {
 
   return (
     <>
-      <h1>{heading}</h1>
-      <div>
+      <div className="navbar">
         <nav>
+          <h1 className="heading">{heading}</h1>
+          <img src={Dark_logo} alt="logo" />
           <div className="burger-menu" onClick={updateMenu}>
             <div className={burger_class}></div>
             <div className={burger_class}></div>
             <div className={burger_class}></div>
           </div>
         </nav>
-        <div className={menu_class}>
-          {items.length === 0 && <p>No items</p>}
-          <ul className="list-group">
-            {items.map((item, index) => (
-              <li
-                className={
-                  selectedIndex === index
-                    ? "list-group-item active"
-                    : "list-group-item"
-                }
-                key={item}
-                onClick={() => {
-                  setSelectedIndex(index);
-                  onSelectItem(item);
-                }}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
+      </div>
+      <div className={menu_class}>
+        {items.length === 0 && <p>No items</p>}
+        <ul className="list-group">
+          {items.map((item, index) => (
+            <li
+              className={
+                selectedIndex === index
+                  ? "list-group-item active"
+                  : "list-group-item"
+              }
+              key={item}
+              onClick={() => {
+                setSelectedIndex(index);
+                onSelectItem(item);
+              }}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
