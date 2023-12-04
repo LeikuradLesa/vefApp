@@ -27,11 +27,18 @@ insert into TegundNotanda values(1, "Nemandi");
 -- create table hopur that has all groups of students and their teachers
 
 create table Hopur (
-    ID int not null,
-    nafnhops varchar(255),
-    notendaID varchar(50) not null,
-    FOREIGN KEY (notendaID) REFERENCES notandi(notendanafn)
+    ID int auto_increment,
+    nafnhops varchar(50) not null,
+    notendanafn varchar(50) not null,
+    notendanafnKennara varchar(50) not null,
+    bokID int not null,
+    primary key(ID),
+    FOREIGN KEY (notendanafn) REFERENCES notandi(notendanafn),
+    FOREIGN KEY (notendanafnKennara) REFERENCES notandi(notendanafn),
+    FOREIGN KEY (bokID) REFERENCES Bok(ID)
 )
+
+drop table Hopur;
 
 -- create table SpurningaTegundir that stores the different types of questions
 create table SpurningaTegundir(
@@ -53,6 +60,10 @@ create table Bok(
     primary key (ID)
 )
 
+-- test data 
+insert into Bok values(2, "ljónið og kötturinn", "Heimir", "2021");
+insert into Bok values(3, "madagaskar", "Arnar", "2020");
+
 -- create table spurningar that stores the different questions
 create table spurningar (
     ID int auto_increment,
@@ -65,6 +76,6 @@ create table spurningar (
     FOREIGN KEY (bokID) REFERENCES Bok(ID)
 )
 
-
+drop table SpurningaTegundir;
 
 

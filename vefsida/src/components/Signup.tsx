@@ -94,8 +94,8 @@ const Signup: React.FC = () => {
 
                 <label >Tegund Notanda:</label>
                 <select id="tegundNotanda" name="tegundnotanda" value={accountInfo.tegundnotanda} onChange={handleInputChange}>
-                <option value="0">Nemandi</option>
-                <option value="1">Kennari</option>
+                <option value="1">Nemandi</option>
+                <option value="0">Kennari</option>
                 </select>
                 <br />
                 

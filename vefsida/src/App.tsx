@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homepage from "./components/Homepage";
-import Nemandi from "./components/VefsidaNemanda";
-
+import Kennari from "./components/Kennari";
+import Nemandi from "./components/Nemandi";
+import "./components/App.css";
 function App() {
   return (
     <div className="App">
@@ -10,6 +11,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/Nemandi" element={<Nemandi />} />
+            <Route path="/Kennari" element={<Kennari />} />
           </Routes>
         </div>
       </Router>

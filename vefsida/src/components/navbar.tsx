@@ -28,6 +28,7 @@ const Navbar = ({ items, heading, onSelectItem }: Props) => {
 
   return (
     <>
+      <h1>{heading}</h1>
       <div className="navbar">
         <nav>
           <h1 className="heading">{heading}</h1>
