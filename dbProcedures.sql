@@ -1,4 +1,4 @@
--- Active: 1699522940973@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
+-- Active: 1700573522610@@leikuradlesa.cxafacplwecg.eu-north-1.rds.amazonaws.com@3306@LeikuradLesa
 
 -- Create a stored procedure that takes in a users notendanafna and lykilord and it checks the tegundnotanda to see if a user is a kennari or a nemandi
 -- if the user is a kennari it returns 1 if a nemandi it returns 0 and if anything elsa it returns -1
@@ -124,14 +124,17 @@ INSERT INTO notandi (notendanafn, lykilord, netfang, nafn, simanumer, dob, tegun
 DELIMITER $$
 CREATE PROCEDURE Showbooks(IN p_notendanafn VARCHAR(50))
 -- It needs to return a list of nafnbokar in the Bok table and it can only be the ones the student is a part of
-BEGIN -- add it so it select the nafnbokar and ID
-    SELECT nafnbokar, Bok.ID FROM Bok WHERE ID IN (SELECT bokID FROM Hopur WHERE notendanafn = p_notendanafn);
+BEGIN 
+    select Bok.ID, Bok.nafnbokar, userProgress.kaflaID, userProgress.siduNumer 
+    from Bok 
+    INNER JOIN userProgress ON Bok.ID=userProgress.bokID
+    group by Bok.ID;
 END $$
 DELIMITER ;
 
 drop procedure Showbooks;
 
-call Showbooks ("HeimirG");
+call Showbooks ("Bjarnason");
 
 -- Create stored procedure that shows all the Hopur where a kennari is part of the kennaranotendanafn ADD
 DELIMITER $$
