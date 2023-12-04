@@ -61,8 +61,9 @@ const Navbar = ({ items, heading, onSelectItem }: Props) => {
             </li>
           ))}
         </ul>
-      </div>
-    </>
+          </div>
+        </div>
+      </>
   );
 };
 
