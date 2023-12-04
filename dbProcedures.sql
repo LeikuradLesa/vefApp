@@ -28,9 +28,12 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE InsertIntoHopur (IN p_nafnhops VARCHAR(50), IN p_notendanafn VARCHAR(50), IN p_notendanafnkennara VARCHAR(50), p_bokID INT)
 BEGIN
-    INSERT INTO hopur(nafnhops, notendanafn, notendanafnKennara, bokID) VALUES (p_nafnhops, p_notendanafn, p_notendanafnKennara, p_bokID);
+    INSERT INTO Hopur(nafnhops, notendanafn, notendanafnKennara, bokID) VALUES (p_nafnhops, p_notendanafn, p_notendanafnKennara, p_bokID);
+    select p_notendanafn AS result;
 END $$
 DELIMITER ;
+
+call InsertIntoHopur ("Bruh2", "HeimirG", "Andrés", 2);
 
 drop procedure InsertIntoHopur;
 
@@ -44,9 +47,33 @@ DELIMITER ;
 
 -- Create stored procedure for Bok table
 DELIMITER $$
-CREATE PROCEDURE InsertBok(IN p_nafnbokar VARCHAR(255), IN p_hofundur VARCHAR(255), IN p_utgafuar VARCHAR(4))
+CREATE PROCEDURE InsertIntoBok(IN p_nafnbokar VARCHAR(255), IN p_hofundur VARCHAR(255), IN p_utgafuar VARCHAR(4))
 BEGIN
     INSERT INTO Bok (nafnbokar, hofundur, utgafuar) VALUES (p_nafnbokar, p_hofundur, p_utgafuar);
+END $$
+DELIMITER ;
+
+drop procedure InsertIntoBok;
+
+-- spurninga tafla
+DELIMITER $$
+create procedure InsertIntoSpurningar2(In p_bokID int, p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_rettsvar varchar(1))
+BEGIN
+    INSERT INTO Fjolsvarspurningar(bokID, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_bokID, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_rettsvar);
+END $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure InsertIntoSpurningar3(In p_bokID int, p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_valkostur3 varchar(255), p_rettsvar varchar(1))
+BEGIN
+    INSERT INTO Fjolsvarspurningar(bokID, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_bokID, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_valkostur3, p_rettsvar);
+END $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure InsertIntoSpurningar4(In p_bokID int, p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_valkostur3 varchar(255), p_valkostur4 varchar(255), p_rettsvar varchar(1))
+BEGIN
+    INSERT INTO Fjolsvarspurningar(bokID, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_bokID, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_valkostur3, p_valkostur4, p_rettsvar);
 END $$
 DELIMITER ;
 

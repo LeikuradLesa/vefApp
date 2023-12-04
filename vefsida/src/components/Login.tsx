@@ -52,13 +52,13 @@ const LoginPage: React.FC = () => {
 
         case 0:
         {
-          navigate("/Nemandi", { state: { username: loginInfo.notendanafn } });
+          navigate("/Kennari", { state: { username: loginInfo.notendanafn } });
           break;
         }
 
         case 1:
         {
-          navigate("/Kennari");
+          navigate("/Nemandi", { state: { username: loginInfo.notendanafn } });
           break;
         }
       }
