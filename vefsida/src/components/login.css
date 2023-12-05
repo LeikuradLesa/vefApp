@@ -10,7 +10,20 @@
     border-style: solid;
     border-color: #000000;
     margin-top: 50px;
-    margin-bottom: 200px;
+    margin-bottom: 250px;
+}
+.signup-container {
+    background-color: #19d101a5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #000000;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 
 .Title {

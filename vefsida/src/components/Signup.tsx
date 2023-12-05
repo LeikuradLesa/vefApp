@@ -56,7 +56,7 @@ const Signup: React.FC = () => {
     };
 
     return (
-        <div className='login-container'>
+        <div className='signup-container'>
             <h3>{error}</h3>
 
             <h1 >Create Account</h1>

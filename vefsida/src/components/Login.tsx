@@ -86,6 +86,7 @@ const LoginPage: React.FC = () => {
         <br />
         <button type="submit">Innskrá</button>
         
+        
       </form>
     </div>
   );
