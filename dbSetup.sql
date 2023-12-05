@@ -147,8 +147,31 @@ INSERT INTO userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
 insert into userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
 ("Addi1111", "Database Fundamentals", 1, 1);
 
+insert into Kaflar (v_nafnbokar, kaflanumer, kaflanafn) VALUES
+    ("Pride and Prejudice", 1, "First Impressions"),
+    ("Pride and Prejudice", 2, "Darcy's Proposal"),
+    ("The Catcher in the Rye", 1, "The Pencey Prep"),
+    ("The Catcher in the Rye", 2, "A Night in New York"),
+    ("The Great Gatsby", 1, "The Early Years"),
+    ("The Great Gatsby", 2, "Gatsby's Party");
+
 
 call InsertIntoHopur ("GE","HeimirG", "Andrés", "Pride and Prejudice");
+call InsertIntoHopur ("GE","HeimirG", "Andrés", "The Catcher in the Rye");
+call InsertIntoHopur ("GE","HeimirG", "Andrés", "The Great Gatsby");
 
+insert into userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
+("HeimirG", "Pride and Prejudice", 5, 1);
 
+insert into userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
+("HeimirG", "The Catcher in the Rye", 7, 1);
+
+insert into userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
+("HeimirG", "The Great Gatsby", 9, 1);
+
+insert into userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
+("HeimirG", "Data Structures and Algorithms", 2, 1);
+
+insert into userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
+("HeimirG", "Database Fundamentals", 1, 1);
 
