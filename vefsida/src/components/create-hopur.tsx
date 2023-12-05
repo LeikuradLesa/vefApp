@@ -59,7 +59,7 @@ const CreateHopur: React.FC<CreateHopurProps> = ({ usernameKennara }) => {
           <input type="number" value={bookId} onChange={(e) => setBookId(Number(e.target.value))} />
         </label>
         <br />
-        <button type="submit">Create Hopur</button>
+        <button type="submit">Stofna Hóp</button>
       </form>
     </div>
   );
