@@ -31,11 +31,11 @@ create table Hopur (
     nafnhops varchar(50) not null,
     notendanafn varchar(50) not null,
     notendanafnKennara varchar(50) not null,
-    bokID int not null,
+    v_nafnbokar varchar(255) not null,
     primary key(ID),
     FOREIGN KEY (notendanafn) REFERENCES notandi(notendanafn),
     FOREIGN KEY (notendanafnKennara) REFERENCES notandi(notendanafn),
-    FOREIGN KEY (bokID) REFERENCES Bok(ID)
+    FOREIGN KEY (v_nafnbokar) REFERENCES Bok(nafnbokar)
 )
 
 drop table Hopur;
@@ -45,29 +45,32 @@ insert into Hopur (nafnhops, notendanafn, notendanafnKennara, bokID) values
 
 -- create table Bok that stores the different books and info on that book
 create table Bok(
-    ID int auto_increment,
     nafnbokar varchar(255) not null,
     hofundur varchar(255) not null,
     utgafuar varchar(4) not null,
-    primary key (ID)
+    primary key (nafnbokar)
 )
 
+drop table Bok;
+
 -- test data 
-insert into Bok values(2, "ljónið og kötturinn", "Heimir", "2021");
-insert into Bok values(3, "madagaskar", "Arnar", "2020");
+insert into Bok values("ljónið og kötturinn", "Heimir", "2021");
+insert into Bok values("madagaskar", "Arnar", "2020");
 
 create table Kaflar (
     kafliID int auto_increment,
-    bokID int not null,
+    v_nafnbokar varchar(255) not null,
     kaflanumer int not null,
     kaflanafn varchar(255),
-    foreign key (bokID) references Bok(ID),
+    foreign key (v_nafnbokar) references Bok(nafnbokar),
     primary key (kafliID)
 )
 
+drop table Kaflar;
+
 create table Fjolsvarspurningar (
     spurning_ID int auto_increment,
-    bokID int not null,
+    v_nafnbokar varchar(255) not null,
     kaflaID int not null,
     spurning varchar(255) not null,
     valkostur1 varchar(255) not null,
@@ -75,20 +78,24 @@ create table Fjolsvarspurningar (
     valkostur3 varchar(255),
     valkostur4 varchar(255),
     rettsvar varchar(1) not null,
-    foreign key (bokID) references Bok(ID),
+    foreign key (v_nafnbokar) references Bok(nafnbokar),
     foreign key (kaflaID) references Kaflar(kafliID),
     primary key (spurning_ID)
 )
 
+drop table Fjolsvarspurningar;
+
 create table userProgress (
     notendanafn varchar(50) not null,
-    bokID int not null,
+    v_nafnbokar varchar(255) not null,
     kaflaID int not null,
     siduNumer int not null,
     foreign key (notendanafn) references notandi(notendanafn),
-    foreign key (bokID) references Bok(ID),
+    foreign key (v_nafnbokar) references Bok(nafnbokar),
     foreign key (kaflaID) references Kaflar(kafliID)
 )
+
+drop table userProgress;
 
 -- Sample data for Books
 INSERT INTO Bok (nafnbokar, hofundur, utgafuar) VALUES
@@ -96,89 +103,42 @@ INSERT INTO Bok (nafnbokar, hofundur, utgafuar) VALUES
     ('Data Structures and Algorithms', 'Jane Doe', '2019');
 
 -- Sample data for Chapters
-INSERT INTO Kaflar (kafliID, bokID, kaflanumer, kaflanafn) values
-    (1, 1, 1, 'Introduction'),
-    (2, 1, 2, 'Database Design'),
-    (3, 2, 1, 'Introduction'),
-    (4, 2, 2, 'Sorting Algorithms');
+INSERT INTO Kaflar (kafliID, v_nafnbokar, kaflanumer, kaflanafn) values
+    (1, "Data Structures and Algorithms", 1, 'Introduction'),
+    (2, "Data Structures and Algorithms", 2, 'Database Design'),
+    (3, "Database Fundamentals", 1, 'Introduction'),
+    (4, "Database Fundamentals", 2, 'Sorting Algorithms');
 
 -- Sample data for Multiple-Choice Questions
-INSERT INTO Fjolsvarspurningar (spurning_ID, bokID, kaflaID, spurning, valkostur1, valkostur2, valkostur3, valkostur4, rettsvar) VALUES
-    (1, 1, 1, 'What is a database?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', 'A'),
-    (2, 1, 1, 'What is a database management system?', 'A software that manages databases', 'A software that manages tables', 'A software that manages data', 'A software that manages data and tables', 'D'),
-    (3, 1, 2, 'What is a database schema?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', 'C'),
-    (4, 1, 2, 'What is a database instance?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', 'A'),
-    (5, 2, 3, 'What is a sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'A'),
-    (6, 2, 3, 'What is a stable sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'D'),
-    (7, 2, 4, 'What is a comparison-based sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'A'),
-    (8, 2, 4, 'What is a non-comparison-based sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', 'D');
+INSERT INTO Fjolsvarspurningar (spurning_ID, v_nafnbokar, kaflaID, spurning, valkostur1, valkostur2, valkostur3, valkostur4, rettsvar) VALUES
+    (1, "Data Structures and Algorithms", 1, 'What is a database?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', '0'),
+    (2, "Data Structures and Algorithms", 1, 'What is a database management system?', 'A software that manages databases', 'A software that manages tables', 'A software that manages data', 'A software that manages data and tables', '3'),
+    (3, "Data Structures and Algorithms", 2, 'What is a database schema?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', '2'),
+    (4, "Data Structures and Algorithms", 2, 'What is a database instance?', 'A collection of related data', 'A collection of unrelated data', 'A collection of related tables', 'A collection of unrelated tables', '0'),
+    (5, "Database Fundamentals", 3, 'What is a sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', '0'),
+    (6, "Database Fundamentals", 3, 'What is a stable sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', '3'),
+    (7, "Database Fundamentals", 4, 'What is a comparison-based sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', '0'),
+    (8, "Database Fundamentals", 4, 'What is a non-comparison-based sorting algorithm?', 'An algorithm that sorts data', 'An algorithm that sorts tables', 'An algorithm that sorts databases', 'An algorithm that sorts data and tables', '3');
 
 
 -- Sample data for User Progress
-INSERT INTO userProgress (notendanafn, bokID, kaflaID, siduNumer) VALUES
-    ('Bjarnason', 1, 1, 1),
-    ('Bjarnason', 1, 1, 2),
-    ('Bjarnason', 1, 2, 1),
-    ('Bjarnason', 1, 2, 2),
-    ('Bjarnason', 2, 3, 1),
-    ('Bjarnason', 2, 3, 2),
-    ('Bjarnason', 2, 4, 1),
-    ('Bjarnason', 2, 4, 2),
-    ('Dagsson', 1, 1, 1),
-    ('Dagsson', 1, 1, 2),
-    ('Dagsson', 1, 2, 1),
-    ('Dagsson', 1, 2, 2),
-    ('Dagsson', 2, 3, 1),
-    ('Dagsson', 2, 3, 2),
-    ('Dagsson', 2, 4, 1),
-    ('Dagsson', 2, 4, 2),
-    ('Einarsson', 1, 1, 1),
-    ('Einarsson', 1, 1, 2),
-    ('Einarsson', 1, 2, 1),
-    ('Einarsson', 1, 2, 2),
-    ('Einarsson', 2, 3, 1),
-    ('Einarsson', 2, 3, 2),
-    ('Einarsson', 2, 4, 1),
-    ('Einarsson', 2, 4, 2),
-    ('Finnsson', 1, 1, 1),
-    ('Finnsson', 1, 1, 2),
-    ('Finnsson', 1, 2, 1),
-    ('Finnsson', 1, 2, 2),
-    ('Finnsson', 2, 3, 1),
-    ('Finnsson', 2, 3, 2),
-    ('Finnsson', 2, 4, 1),
-    ('Finnsson', 2, 4, 2),
-    ('Gunnarsson', 1, 1, 1),
-    ('Gunnarsson', 1, 1, 2),
-    ('Gunnarsson', 1, 2, 1),
-    ('Gunnarsson', 1, 2, 2),
-    ('Gunnarsson', 2, 3, 1),
-    ('Gunnarsson', 2, 3, 2),
-    ('Gunnarsson', 2, 4, 1),
-    ('Gunnarsson', 2, 4, 2),
-    ('Hjartarson', 1, 1, 1),
-    ('Hjartarson', 1, 1, 2),
-    ('Hjartarson', 1, 2, 1),
-    ('Hjartarson', 1, 2, 2),
-    ('Hjartarson', 2, 3, 1),
-    ('Hjartarson', 2, 3, 2),
-    ('Hjartarson', 2, 4, 1),
-    ('Hjartarson', 2, 4, 2),
-    ('Ingolfsson', 1, 1, 1),
-    ('Ingolfsson', 1, 1, 2),
-    ('Ingolfsson', 1, 2, 1),
-    ('Ingolfsson', 1, 2, 2),
-    ('Ingolfsson', 2, 3, 1),
-    ('Ingolfsson', 2, 3, 2),
-    ('Ingolfsson', 2, 4, 1),
-    ('Ingolfsson', 2, 4, 2),
-    ('Johannsson', 1, 1, 1),
-    ('Johannsson', 1, 1, 2),
-    ('Johannsson', 1, 2, 1),
-    ('Johannsson', 1, 2, 2),
-    ('Johannsson', 2, 3, 1),
-    ('Johannsson', 2, 3, 2),
-    ('Johannsson', 2, 4, 1);
+INSERT INTO userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
+    ('Bjarnason', "Data Structures and Algorithms", 1, 1),
+    ('Bjarnason', "Database Fundamentals", 3, 1),
+    ('Dagsson', "Data Structures and Algorithms", 1, 1),
+    ('Dagsson', "Database Fundamentals", 3, 1),
+    ('Einarsson', "Data Structures and Algorithms", 1, 1),
+    ('Einarsson', "Database Fundamentals", 4, 2),
+    ('Finnsson', "Data Structures and Algorithms", 1, 1),
+    ('Finnsson', "Database Fundamentals", 3, 1),
+    ('Gunnarsson', "Data Structures and Algorithms", 1, 1),
+    ('Gunnarsson', "Database Fundamentals", 3, 1),
+    ('Hjartarson', "Data Structures and Algorithms", 1, 1),
+    ('Hjartarson', "Database Fundamentals", 3, 1),
+    ('Ingolfsson', "Data Structures and Algorithms", 2, 1),
+    ('Ingolfsson', "Database Fundamentals", 4, 1),
+    ('Johannsson', "Data Structures and Algorithms", 2, 1),
+    ('Johannsson', "Database Fundamentals", 4, 1);
 
-insert into userProgress (notendanafn, bokID, kaflaID, siduNumer) VALUES
-("Addi", 1, 1, 1);
+insert into userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
+("Addi", "Database Fundamentals", 1, 1);
