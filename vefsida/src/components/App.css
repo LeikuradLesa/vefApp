@@ -81,8 +81,35 @@ div.about-us, h2,p {
   margin: 0 auto;
   border: 16px solid black;
   border-radius: 40px;
-  overflow: auto;
+  overflow: auto; 
 }
+
+.App::-webkit-scrollbar {
+  display: none; 
+}
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+}
+
 /*Hér fyrir neðan er css fyrir nemanda síðuna*/
 .book-list {
   display: flex;
