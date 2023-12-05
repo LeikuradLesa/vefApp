@@ -134,13 +134,14 @@ BEGIN
     select Bok.nafnbokar, userProgress.kaflaID, userProgress.siduNumer 
     from Bok 
     INNER JOIN userProgress ON Bok.nafnbokar=userProgress.v_nafnbokar
-    group by Bok.nafnbokar;
+    where userProgress.notendanafn=p_notendanafn
+    group by userProgress.v_nafnbokar;
 END $$
 DELIMITER ;
 
 drop procedure Showbooks;
 
-call Showbooks ("Bjarnason");
+call Showbooks ("Addi");
 
 -- Create stored procedure that shows all the Hopur where a kennari is part of the kennaranotendanafn ADD
 DELIMITER $$

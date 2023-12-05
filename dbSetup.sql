@@ -54,8 +54,12 @@ create table Bok(
 drop table Bok;
 
 -- test data 
-insert into Bok values("ljónið og kötturinn", "Heimir", "2021");
-insert into Bok values("madagaskar", "Arnar", "2020");
+INSERT INTO Bok (nafnbokar, hofundur, utgafuar) VALUES
+('The Great Gatsby', 'F. Scott Fitzgerald', '1925'),
+('To Kill a Mockingbird', 'Harper Lee', '1960'),
+('1984', 'George Orwell', '1949'),
+('Pride and Prejudice', 'Jane Austen', '1813'),
+('The Catcher in the Rye', 'J.D. Salinger', '1951');
 
 create table Kaflar (
     kafliID int auto_increment,
@@ -141,4 +145,10 @@ INSERT INTO userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
     ('Johannsson', "Database Fundamentals", 4, 1);
 
 insert into userProgress (notendanafn, v_nafnbokar, kaflaID, siduNumer) VALUES
-("Addi", "Database Fundamentals", 1, 1);
+("Addi1111", "Database Fundamentals", 1, 1);
+
+
+call InsertIntoHopur ("GE","HeimirG", "Andrés", "Pride and Prejudice");
+
+
+
