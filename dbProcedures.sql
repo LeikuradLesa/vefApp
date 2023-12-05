@@ -26,14 +26,15 @@ DELIMITER ;
 
 -- Create stored procedure for Hopur table
 DELIMITER $$
-CREATE PROCEDURE InsertIntoHopur (IN p_nafnhops VARCHAR(50), IN p_notendanafn VARCHAR(50), IN p_notendanafnkennara VARCHAR(50), p_bokID INT)
+CREATE PROCEDURE InsertIntoHopur (IN p_nafnhops VARCHAR(50), IN p_notendanafn VARCHAR(50), IN p_notendanafnkennara VARCHAR(50), p_nafnbokar varchar(255))
 BEGIN
-    INSERT INTO Hopur(nafnhops, notendanafn, notendanafnKennara, bokID) VALUES (p_nafnhops, p_notendanafn, p_notendanafnKennara, p_bokID);
+    INSERT INTO Hopur(nafnhops, notendanafn, notendanafnKennara, v_nafnbokar) VALUES (p_nafnhops, p_notendanafn, p_notendanafnKennara, p_nafnbokar);
     select p_notendanafn AS result;
 END $$
 DELIMITER ;
 
-call InsertIntoHopur ("Bruh2", "Arnar", "AlliG", 2);
+
+call InsertIntoHopur ("Bruh2", "Arnar", "AlliG", "Data Structures and Algorithms");
 
 drop procedure InsertIntoHopur;
 
@@ -57,26 +58,31 @@ drop procedure InsertIntoBok;
 
 -- spurninga tafla
 DELIMITER $$
-create procedure InsertIntoSpurningar2(In p_bokID int, p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_rettsvar varchar(1))
+create procedure InsertIntoSpurningar2(In p_nafnbokar varchar(255), p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_rettsvar varchar(1))
 BEGIN
-    INSERT INTO Fjolsvarspurningar(bokID, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_bokID, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_rettsvar);
+    INSERT INTO Fjolsvarspurningar(v_nafnbokar, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_nafnbokar, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_rettsvar);
 END $$
 DELIMITER ;
+
+drop procedure InsertIntoSpurningar2;
 
 DELIMITER $$
-create procedure InsertIntoSpurningar3(In p_bokID int, p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_valkostur3 varchar(255), p_rettsvar varchar(1))
+create procedure InsertIntoSpurningar3(In p_nafnbokar varchar(255), p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_valkostur3 varchar(255), p_rettsvar varchar(1))
 BEGIN
-    INSERT INTO Fjolsvarspurningar(bokID, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_bokID, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_valkostur3, p_rettsvar);
+    INSERT INTO Fjolsvarspurningar(v_nafnbokar, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_nafnbokar, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_valkostur3, p_rettsvar);
 END $$
 DELIMITER ;
+
+drop procedure InsertIntoSpurningar3;
 
 DELIMITER $$
-create procedure InsertIntoSpurningar4(In p_bokID int, p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_valkostur3 varchar(255), p_valkostur4 varchar(255), p_rettsvar varchar(1))
+create procedure InsertIntoSpurningar4(In p_nafnbokar varchar(255), p_kaflaID int, p_spurning VARCHAR(255), p_valkostur1 varchar(255), p_valkostur2 varchar(255), p_valkostur3 varchar(255), p_valkostur4 varchar(255), p_rettsvar varchar(1))
 BEGIN
-    INSERT INTO Fjolsvarspurningar(bokID, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_bokID, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_valkostur3, p_valkostur4, p_rettsvar);
+    INSERT INTO Fjolsvarspurningar(v_nafnbokar, kaflaID, spurning, Valkostur1, valkostur2, rettsvar) values (p_nafnbokar, p_kaflaID, p_spurning, p_valkostur1, p_valkostur2, p_valkostur3, p_valkostur4, p_rettsvar);
 END $$
 DELIMITER ;
 
+drop procedure InsertIntoSpurningar4;
 
 -- insert the test data into the table notandi and make sure to use the same notendanafn in the table Hopur
 INSERT INTO notandi (notendanafn, lykilord, netfang, nafn, simanumer, dob, tegundnotanda) values
@@ -90,7 +96,7 @@ INSERT INTO notandi (notendanafn, lykilord, netfang, nafn, simanumer, dob, tegun
 ("Johannsson", "123", "Johannsson@gmail.com", "Johann Johannsson", "1234567", "1990-01-01", 1),
 ("Karlsson", "123", "Karlsson@gmail.com", "Karl Karlsson", "1234567", "1990-01-01", 1);
 -- insert test data into `Hopur` table
-INSERT INTO Hopur (nafnhops, notendanafn, notendanafnKennara, bokID) values 
+/* INSERT INTO Hopur (nafnhops, notendanafn, notendanafnKennara, bokID) values 
 ("GRE", "Bjarnason", "Andrés", 2),
 ("GRE", "Dagsson", "Andrés", 3),
 ("GRE", "Einarsson", "Andrés", 3),
@@ -111,7 +117,7 @@ INSERT INTO Hopur (nafnhops, notendanafn, notendanafnKennara, bokID) values
 ("GRE4", "Hjartarson", "Björn", 1),
 ("GRE5", "Ingolfsson", "Björn", 1),
 ("GRE7", "Johannsson", "Björn", 1),
-("GRE6", "Karlsson", "Björn", 1);
+("GRE6", "Karlsson", "Björn", 1); */  -- G-mul prufu gögn ef þu vilt nota þarf að breyta bokID í v_nafnbokar og varchar(255) svo láta valid bók
 
 select * from Hopur;
 
@@ -125,10 +131,10 @@ DELIMITER $$
 CREATE PROCEDURE Showbooks(IN p_notendanafn VARCHAR(50))
 -- It needs to return a list of nafnbokar in the Bok table and it can only be the ones the student is a part of
 BEGIN 
-    select Bok.ID, Bok.nafnbokar, userProgress.kaflaID, userProgress.siduNumer 
+    select Bok.nafnbokar, userProgress.kaflaID, userProgress.siduNumer 
     from Bok 
-    INNER JOIN userProgress ON Bok.ID=userProgress.bokID
-    group by Bok.ID;
+    INNER JOIN userProgress ON Bok.nafnbokar=userProgress.v_nafnbokar
+    group by Bok.nafnbokar;
 END $$
 DELIMITER ;
 
@@ -152,10 +158,10 @@ DELIMITER $$
 CREATE PROCEDURE ShowStudents(IN p_kennaranotendanafn VARCHAR(50))
 -- needs to return a list of the studnets notendanafn and book name and be sorted by there name so that duplicate names are easier to read
 BEGIN
-    SELECT Hopur.notendanafn, Bok.nafnbokar FROM notandi, Hopur, Bok WHERE notandi.notendanafn = Hopur.notendanafn AND Hopur.bokID = Bok.ID AND Hopur.notendanafnKennara = p_kennaranotendanafn ORDER BY notandi.nafn;
+    SELECT Hopur.notendanafn, Bok.nafnbokar FROM notandi, Hopur, Bok WHERE notandi.notendanafn = Hopur.notendanafn AND Hopur.v_nafnbokar = Bok.nafnbokar AND Hopur.notendanafnKennara = p_kennaranotendanafn ORDER BY notandi.nafn;
 END $$
 DELIMITER ;
 
 drop procedure ShowStudents;
 
-call ShowStudents ("Andrés");
+call ShowStudents ("AlliG");
