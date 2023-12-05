@@ -42,6 +42,7 @@ const Navbar = ({ items, heading }: Props) => {
         {items.length === 0 && <p>No items</p>}
         <ul className="list-group">
           {items.map((item, index) => (
+            ///muna að klára
             <a href="/" onClick={() => setSelectedIndex(index)}>
               <li
                 className={

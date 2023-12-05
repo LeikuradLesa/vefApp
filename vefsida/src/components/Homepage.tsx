@@ -6,7 +6,13 @@ import AboutUs from "./about-us";
 import Footer from "./footer";
 
 function Homepage() {
-  let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
+  let items = [
+    "Um okkur",
+    "Hafðu samband",
+    "Leiðbeningar",
+    "Inskráning",
+    "Útskráning",
+  ];
 
   return (
     <React.Fragment>
