@@ -13,7 +13,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/Nemandi" element={<Nemandi />} />
             <Route path="/Kennari" element={<Kennari />} />
-            <Route path="/spurning/:bookId?/:kaflaId?" element={<Spurningar />} />
+            <Route path="/spurning/:v_nafnbokar?/:kaflaID?" element={<Spurningar />} />
           </Routes>
         </div>
       </Router>
