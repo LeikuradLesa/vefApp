@@ -39,7 +39,7 @@ const NemandiGogn: React.FC<TypingH1Props> = ({ username }) => {
       ) : (
         <div>
           {books.map((book, index) => (
-            <Link key={index} to={`/spurning/${book.ID}/${book.kaflaID}`} className="book-link">
+            <Link key={index} to={`/spurning/${book.nafnbokar}/${book.kaflaID}`} className="book-link">
               <h2 className="book-title">{book.nafnbokar}</h2>
               <h2 className="book-title">Kafli: {book.kaflaID}</h2>
               <h2 className="book-title">Blaðsíða: {book.siduNumer}</h2>
