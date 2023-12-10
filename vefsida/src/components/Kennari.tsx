@@ -8,7 +8,7 @@ import CreateHopur from "./create-hopur";
 import "./App.css";
 
 function Kennari() {
-    let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
+    let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning", "útskráning"];
     const handleSelectectItem = (item: any) => {
         console.log(item);
     };

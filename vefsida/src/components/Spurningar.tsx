@@ -63,6 +63,7 @@ const Spurningar: React.FC = () => {
 
   return (
     <div className="spurningar-container">
+      
       <h1 className='title'>{v_nafnbokar}</h1>
       {questions.map((question) => (
         <div key={question.spurning_ID} className="question-container">
@@ -88,7 +89,7 @@ const Spurningar: React.FC = () => {
       ))}
       <button className="check-answers-button" onClick={checkAnswers}>Check Answers</button>
       {result !== null && (
-                <p className="result-message">{result ? 'All answers are correct!' : 'Some answers are incorrect.'}</p>
+                <p className="result-message">{result ? 'Öll svörin voru rétt! Vel Gert! :)' : 'Eitthvað var vitlaust! :('}</p>
               )}
             </div>
           );

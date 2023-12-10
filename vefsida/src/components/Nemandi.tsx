@@ -5,7 +5,7 @@ import Navbar from "./navbar";
 import NemandiGogn from "./Nemandi-gogn";
 
 const Nemandi: React.FC = () => {
-    let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
+    let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning", "útskráning"];
     const handleSelectectItem = (item: any) => {
         console.log(item);
     };
