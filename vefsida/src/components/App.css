@@ -77,7 +77,7 @@ div.about-us, h2,p {
 /*Hérna fyrir neðan er css fyrir Borderinum*/
 .App {
   max-width: 375px; 
-  height: 812px; 
+  height: 710px; 
   margin: 0 auto;
   border: 16px solid black;
   border-radius: 40px;
@@ -160,10 +160,11 @@ div.about-us, h2,p {
 
 .books{
   border-radius: 20px;
-  border-color: #000000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-style: solid;
   margin: 5%;
   padding: 5%;
+  background-color: #f2f2f2;
 }
 
 /*hérna fyrir neðan er css fyrir spurningarnar*/
