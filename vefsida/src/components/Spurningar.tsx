@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import './App.css';
 interface Question {
   kaflaID: number;
   rettsvar: string;
@@ -62,13 +62,15 @@ const Spurningar: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="spurningar-container">
+      
+      <h1 className='title'>{v_nafnbokar}</h1>
       {questions.map((question) => (
-        <div key={question.spurning_ID}>
-          <p>{question.spurning}</p>
-          <ul>
+        <div key={question.spurning_ID} className="question-container">
+          <p className="question-text">{question.spurning}</p>
+          <ul className="answer-options">
             {[1, 2, 3, 4].map((index) => (
-              <li key={index}>
+              <li key={index} className="answer-option">
                 <label>
                   <input
                     type="radio"
@@ -82,15 +84,15 @@ const Spurningar: React.FC = () => {
               </li>
             ))}
           </ul>
-          <hr />
+          <hr className="question-divider" />
         </div>
       ))}
-      <button onClick={checkAnswers}>Check Answers</button>
+      <button className="check-answers-button" onClick={checkAnswers}>Check Answers</button>
       {result !== null && (
-        <p>{result ? 'All answers are correct!' : 'Some answers are incorrect.'}</p>
-      )}
-    </div>
-  );
-};
+                <p className="result-message">{result ? 'Öll svörin voru rétt! Vel Gert! :)' : 'Eitthvað var vitlaust! :('}</p>
+              )}
+            </div>
+          );
+        };
 
-export default Spurningar;
+        export default Spurningar;
