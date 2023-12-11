@@ -1,12 +1,15 @@
-# Lýsing yfir hugmyndinni fyrir skóla
+#Leikur að Lesa  
+
+  
+## Lýsing yfir hugmyndinni fyrir skóla
 Hugmynd okkar er vefapp sem að verðlaunar/hvetur krakka fyrir að lesa heima og í skólanum.
 Kennari setur upp hóp á síðunni af nemendum sínum og í þeim hóp er markmið að lesa 1 bók.
 Þegar að barn er búið að lesa 1 kafla þá merkir það svoleiðis við á netinu og fær það þá upp smá próf sem að kennarinn hefur sett fyrir eins og t.d. 2-4 fjölsvarsspurningar og ef nemandi stendur sig ekki þá er hann beðinn að lesa kaflann upp á nýtt til að hjálpa honum að muna eftir bókinni og æfa hann líka undir möguleg próf eða verkefni sem kennari setur í náminu. Kennari sér svo þegar að nemandi nær eða nær ekki kaflaprófum og hjálpar það honum að vita hverjir hafa gert sína heimavinnu þannig að fólk er ekki hópað með þeim sem hafa ekkert lesið í t.d. verkefnatímum og þurfa að gera alla vinnuna. 
 
-# Lýsing yfir hugmyndinni fyrir foreldra
+## Lýsing yfir hugmyndinni fyrir foreldra
 Hugmynd okkar er hugsuð í kringum foreldra sem og skóla. Foreldrar geta búið til lestrarhópa samsetta af mörgum börnum t.d. sínum eða vinahóp barnanna sinna og hægt er líka að hafa bara eitt barn í hóp. Foreldrar geta sett tímamarkmið, blaðsíðumarkmið eða kaflamarkmið fyrir hópinn. Foreldra geta stjórnað stigagjöf með að gefa multiplier þann dag eða hækka stigagjöfina fyrir að klára bók. foreldrar geta sett markmið að vera buin að lesa fyrir kl eitthvað sérstakt hvern einasta dag.
 
-# Lýsing yfir hugmyndinni fyrir börnin
+## Lýsing yfir hugmyndinni fyrir börnin
 Börnin fá stig þegar þau ná markmiði eða ef þau ná að halda streak eins og að lesa í 15 mínútur á dag í viku. Börn geta notað stigin til að fá hatta á karakterana sína og svo montað sig við vini sína hver er með flottasta karakterinn þetta hvetur þau til að ná markmiði sínu daglega. Hægt er að skoða sitt stigatal miðað við meðaltal hópsins til að sjá hvernig þér gengur miðað við aðra í hópnum. 
 
 ## Wireflow
