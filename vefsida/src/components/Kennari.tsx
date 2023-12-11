@@ -7,8 +7,8 @@ import CreateHopur from "./create-hopur";
 import "./App.css";
 
 function Kennari() {
-  let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Útskráning"];
-  let linkid = ["/Um okkur", "/Hafðu samband", "/Leiðbeningar", "/Inskráning"];
+  let items = ["Um okkur", "Hafðu samband", "Útskráning"];
+  let linkid = ["#umOkkur", "#hafduSamband", "/"];
   const location = useLocation();
   const user = location.state as { username: string } | undefined;
   const username = user?.username;
