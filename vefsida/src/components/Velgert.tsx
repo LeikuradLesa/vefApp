@@ -16,12 +16,6 @@ const Velgert: React.FC = () => {
 
     return (
         <React.Fragment>
-            <Navbar
-                items={items}
-                heading="Leikur að lesa"
-                onSelectItem={handleSelectectItem}
-            />
-            
             <h1 className="welcome">Velgert {user?.username}</h1>
 
             <Link to='/Nemandi' state={{ username: username }}>Til baka</Link>

@@ -56,7 +56,7 @@ const Spurningar: React.FC = () => {
 
   const checkAnswers = async () => {
     try {
-      const newResult = questions.every((question) => {
+      const newResult = questions.every((question: any) => {
         const selectedAnswer = selectedAnswers[question.spurning_ID];
         return selectedAnswer === question[`valkostur${parseInt(question.rettsvar, 10) + 1}`];
       });
@@ -90,7 +90,7 @@ const Spurningar: React.FC = () => {
     <div className="spurningar-container">
       
       <h1 className='title'>{v_nafnbokar}</h1>
-      {questions.map((question) => (
+      {questions.map((question: any) => (
         <div key={question.spurning_ID} className="question-container">
           <p className="question-text">{question.spurning}</p>
           <ul className="answer-options">
