@@ -3,10 +3,11 @@ import "./navbar.css";
 import Dark_logo from "../assets/dark_logo_png.png";
 interface Props {
   items: string[];
+  linkid: string[];
   heading: string;
 }
 
-const Navbar = ({ items, heading }: Props) => {
+const Navbar = ({ linkid, items, heading }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
@@ -42,8 +43,7 @@ const Navbar = ({ items, heading }: Props) => {
         {items.length === 0 && <p>No items</p>}
         <ul className="list-group">
           {items.map((item, index) => (
-            ///muna að klára
-            <a href="/" onClick={() => setSelectedIndex(index)}>
+            <a href={linkid[index]} onClick={() => setSelectedIndex(index)}>
               <li
                 className={
                   selectedIndex === index

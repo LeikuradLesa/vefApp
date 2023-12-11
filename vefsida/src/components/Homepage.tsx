@@ -6,17 +6,11 @@ import AboutUs from "./about-us";
 import Footer from "./footer";
 
 function Homepage() {
-  let items = [
-    "Um okkur",
-    "Hafðu samband",
-    "Leiðbeningar",
-    "Inskráning",
-    "Útskráning",
-  ];
-
+  let items = ["Um okkur", "Hafðu samband", "Leiðbeningar", "Inskráning"];
+  let linkid = ["/Um okkur", "/Hafðu samband", "/Leiðbeningar", "/Inskráning"];
   return (
     <React.Fragment>
-      <Navbar items={items} heading="Leikur að lesa" />
+      <Navbar items={items} heading="Leikur að lesa" linkid={linkid} />
 
       <Login />
       <Signup />
