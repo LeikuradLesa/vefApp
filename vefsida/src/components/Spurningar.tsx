@@ -74,7 +74,7 @@ const Spurningar: React.FC = () => {
           },
           body: JSON.stringify({
             where: `notendanafn='${nafn}' AND v_nafnbokar='${v_nafnbokar_decoded}'`,
-            kaflaID: parseInt(kaflaID, 10) + 1, // Convert kaflaID to integer
+            kaflaID: parseInt(kaflaID || "1", 10) + 1, // Convert kaflaID to integer
           }),
         });
 
