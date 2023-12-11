@@ -31,7 +31,9 @@ const Navbar = ({ linkid, items, heading }: Props) => {
       <div className="navbar_items">
         <nav>
           <h1 className="heading">{heading}</h1>
-          <img src={Dark_logo} alt="logo" />
+          <a href="/">
+            <img src={Dark_logo} alt="logo" />
+          </a>
           <div className="burger-menu" onClick={updateMenu}>
             <div className={burger_class}></div>
             <div className={burger_class}></div>
