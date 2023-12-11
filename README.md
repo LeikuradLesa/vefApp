@@ -22,3 +22,6 @@ Við erum að nota frían DB frá Amazon og er létt að tengjast honum yfir net
 
 ## Virkni Vídeó
 https://youtu.be/Nkt4wB8FNDk
+
+## Ókláruð virkni
+Við eigum eftir að klára level up system, avatar. Við áttum líka eftir að gera það einfaldara að búa til hóp á kennara síðu. Það vantar líka hvernig maður skráir á hvaða blaðsíðu maður er á fyrir nemanda. Það vantar líka hvernig maður Býr til spurningar.
