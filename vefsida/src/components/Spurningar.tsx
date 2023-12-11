@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import './App.css';
 interface Question {
   kaflaID: number;
@@ -14,10 +15,11 @@ interface Question {
 }
 
 const Spurningar: React.FC = () => {
-  const { v_nafnbokar, kaflaID } = useParams();
+  const { v_nafnbokar, kaflaID, nafn } = useParams();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
   const [result, setResult] = useState<boolean | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,13 +54,36 @@ const Spurningar: React.FC = () => {
     setSelectedAnswers((prevAnswers) => ({ ...prevAnswers, [questionId]: answer }));
   };
 
-  const checkAnswers = () => {
-    const newResult = questions.every((question) => {
-      const selectedAnswer = selectedAnswers[question.spurning_ID];
-      return selectedAnswer === question[`valkostur${parseInt(question.rettsvar, 10) + 1}`];
-    });
+  const checkAnswers = async () => {
+    try {
+      const newResult = questions.every((question) => {
+        const selectedAnswer = selectedAnswers[question.spurning_ID];
+        return selectedAnswer === question[`valkostur${parseInt(question.rettsvar, 10) + 1}`];
+      });
 
-    setResult(newResult);
+      setResult(newResult);
+
+      if (newResult) {
+        // Make a POST request here
+        const v_nafnbokar_decoded = decodeURIComponent(v_nafnbokar || "bruh");
+
+        await fetch('https://bilazon.pythonanywhere.com/change/userProgress', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            where: `notendanafn='${nafn}' AND v_nafnbokar='${v_nafnbokar_decoded}'`,
+            kaflaID: parseInt(kaflaID, 10) + 1, // Convert kaflaID to integer
+          }),
+        });
+
+        // Navigate to "/Velgert" after the POST request
+        navigate("/Velgert", { state: { username: nafn } });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
