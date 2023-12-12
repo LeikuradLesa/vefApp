@@ -1,6 +1,8 @@
 # Leikur að Lesa  
 ###### Eftir Andrés Haukur Andrésson, Arnar Karlson, Heimir Berg Guðmundsson og Hrannar Haraldsson
 ###### VEFÞ3VÞ Haust 2023, Tölvubraut í Tækniskólinn
+###### React, Vite, Flask, Amazon RDS
+
   
 ## Lýsingar: 
 ### Fyrir skóla
