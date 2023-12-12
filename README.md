@@ -28,4 +28,7 @@ Við erum að nota frían DB frá Amazon og er létt að tengjast honum yfir net
 ![mynd af Figma](https://github.com/LeikuradLesa/vefApp/blob/main/Figma.png)
 
 ## Virkni Vídeó
-https://youtu.be/Nkt4wB8FNDk
+https://youtu.be/Nkt4wB8FNDk  
+  
+## Skjáskot af vefsíðu  
+![Skjáskot](https://github.com/LeikuradLesa/vefApp/blob/main/Skjamyndir/Skj%C3%A1skot.png)
